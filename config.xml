@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns		= "http://www.w3.org/ns/widgets"
-	xmlns:gap	= "http://phonegap.com/ns/1.0"
-	id		= "net.pixelburn.passwordhasher"
-	version 	= "1.0.0">
-
-	<name>PhoneGap: Getting Started</name>
-
-	<description>
-		A simple password hasher for Android. Based on the original Chrome extention password hasher plus.
-	</description>
-
-	<author href="https://github.com/pixeldrew"
-		email="drew@pixelburn.net">
-		Drew Foehn
-	</author>
-
-	<gap:platforms>
-		<gap:platform name="android" minVersion="2.1" />
-	</gap:platforms>
-
-	<icon src="icon.png" gap:role="default" />
-
-	<feature name="http://api.phonegap.com/1.0/network"/>
-
+<widget xmlns="http://www.w3.org/ns/widgets"
+ xmlns:gap="http://phonegap.com/ns/1.0"
+ id="net.pixelburn.passwordhasher"
+ version="1.0.0">
+    
+    <name>
+        Password Hasher
+    </name>
+    
+    <description>
+        A simple password hasher for Android. Based on the original Chrome extention password hasher plus.
+    </description>
+    
+    <author href="https://github.com/pixeldrew"
+     email="drew@pixelburn.net">
+        Drew Foehn
+    </author>
+    
+    <gap:platforms>
+        <gap:platform name="android" minVersion="2.1"/>
+    </gap:platforms>
+    
+    <icon src="icon.png" gap:role="default"/>
+    
+    <feature name="http://api.phonegap.com/1.0/network"/>
+    
 </widget>
