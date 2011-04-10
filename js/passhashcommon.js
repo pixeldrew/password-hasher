@@ -335,6 +335,6 @@ var PassHashCommon =
 
         return s;
 
-    },
+    }
 
 }

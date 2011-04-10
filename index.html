@@ -1,219 +1,62 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>Password Hasher Plus</title>
-        <link rel="stylesheet" href="css/jquery.mobile.min.css" />
-		<script src="js/phonegap.0.9.4.js">
-        </script>
-        <script src="js/jquery.min.js">
-        </script>
-        <script src="js/jquery.mobile.min.js">
-        </script>
-        <script type="text/javascript" charset="utf-8" src="js/sha1.js">
-        </script>
-        <script type="text/javascript" charset="utf-8" src="js/passhashcommon.js">
-        </script>
-        <script type="text/javascript">
-            /* ***** BEGIN LICENSE BLOCK *****
-             * Version: MPL 1.1/GPL 2.0/LGPL 2.1
-             *
-             * The contents of this file are subject to the Mozilla Public License Version
-             * 1.1 (the "License"); you may not use this file except in compliance with
-             * the License. You may obtain a copy of the License at
-             * http://www.mozilla.org/MPL/
-             *
-             * Software distributed under the License is distributed on an "AS IS" basis,
-             * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
-             * for the specific language governing rights and limitations under the
-             * License.
-             *
-             * The Original Code is Password Hasher Plus
-             *
-             * The Initial Developer of the Original Code is Eric Woodruff.
-             * Portions created by the Initial Developer are Copyright (C) 2010
-             * the Initial Developer. All Rights Reserved.
-             *
-             * Contributor(s): (none)
-             *
-             * Alternatively, the contents of this file may be used under the terms of
-             * either the GNU General Public License Version 2 or later (the "GPL"), or
-             * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
-             * in which case the provisions of the GPL or the LGPL are applicable instead
-             * of those above. If you wish to allow use of your version of this file only
-             * under the terms of either the GPL or the LGPL, and not to allow others to
-             * use your version of this file under the terms of the MPL, indicate your
-             * decision by deleting the provisions above and replace them with the notice
-             * and other provisions required by the GPL or the LGPL. If you do not delete
-             * the provisions above, a recipient may use your version of this file under
-             * the terms of any one of the MPL, the GPL or the LGPL.
-             *
-             * ***** END LICENSE BLOCK ***** */
-            String.prototype.startsWith = function(str){
-                return (this.match("^" + str) == str);
-            }
-            
-            String.prototype.substringAfter = function(str){
-                return (this.substring(this.indexOf(str) + str.length));
-            }
-            
-            var default_length = 8;
-            var default_strength = 2;
-            
-            function generateGuid(){
-                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
-                    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                    return v.toString(16);
-                }).toUpperCase();
-            }
-            
-            function generateHash(config, input){
-                var site = config.site;
-                
-                if (!site.startsWith("compatible:")) {
-                    site = PassHashCommon.generateHashWord(config.seed, site, 24, true, // require digits
-             true, // require punctuation
-             true, // require mixed case
-             false, // no special characters
-             false // only digits
-            );
-                }
-                else {
-                    site = site.substringAfter(":");
-                }
-                
-                return PassHashCommon.generateHashWord(site, input, config.length, true, // require digits
-             config.strength > 1, // require punctuation
-             true, // require mixed case
-             config.strength < 2, // no special characters
-             config.strength == 0 // only digits
-            );
-            }
-            
-            function togglePasswords(){
-				
-				var type;
-                if($('#hidepass:checked').length > 0) {
-					
-					type = "password";
-				} else {
-					type = "text";
-				}
-				
-				$('.password').each(function(i) {
-					var ele = $(this).get(0);
-					ele.type = type;	
-				});
-				
-            }
-            
-            function bumpLabel(){
-                var re = new RegExp("^([^:]+?)(:([0-9]+))?$");
-                var site = $('#site').val();
-                if (site.startsWith("compatible:")) {
-                    site = site.substringAfter("compatible:");
-                }
-                var matcher = re.exec(site);
-                var bump = 1;
-                if (null != matcher[3]) {
-                    site = matcher[1];
-                    bump += parseInt(matcher[3]);
-                }
-                $("#site").val(site + ":" + bump);
-            }
-            
-            function update(){
-                var config = {};
-                config.site = $('#site').val();
-                config.seed = $('#salt').val();
-                config.length = $("#passlength").val();
-                config.strength = $('#strength').val();
-                var hash = generateHash(config, $('#password').val());
-                
-                $('#hash').val(hash);
-            }
-            
-            function createGuid(){
-                $('#seed').val(generateGuid());
-                update();
-            }
-            
-            
-            $('#mainPage').live('pagecreate', function(){
-            
-                $('#bumpBtn').click(bumpLabel);
-                $('#guidBtn').click(createGuid);
-                
-                $('input[name="hidepass"]').bind('tap change', togglePasswords);
-                $('.input').bind('keydown keyup change', update);
-                
-                $('#hash').bind("click", function(){
-                    $('#hash').get(0).select();
-                });
-            });
-        </script>
-    </head>
-    <body>
-        <div data-role="page" id="mainPage">
-            <div data-role="header">
-                <h1>#Password Hasher#</h1>
+<head>
+    <title>PHasher+</title>
+    <link rel="stylesheet" href="css/redmond/jquery-ui.custom.css" />
+    <link rel="stylesheet" href="css/jquery.mobile-1.0a4.1.min.css" />
+    <link rel="stylesheet" href="css/main.css"/>
+    <script src="js/phonegap.0.9.4.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile-1.0a4.1.min.js"></script>
+    <script src="js/jquery-ui.custom.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/sha1.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/passhashcommon.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/main.js"></script>
+</head>
+<body>
+    <div data-role="page" id="mainPage">
+        <div data-role="header">
+            <h1>#Phasher#</h1>
+        </div>
+        <div data-role="content">
+            <div data-role="fieldcontain">
+ 				<fieldset data-role="controlgroup">
+					<input type="checkbox" name="showpass" id="showpass" class="custom" />
+					<label for="showpass">Show Password Fields</label>
+    			</fieldset>
+			</div>
+            <div data-role="fieldcontain">
+                <label for="site">Site Tag:</label>
+                <input type="text" id="site" class="input" name="site" value=""/><input type="button" value="Bump" id="bumpBtn" data-inline="true"/>
             </div>
-            <div data-role="content">
-                <fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-                	Passwords: 
-                    <label for="hidepass">
-                        Hide
-                    </label>
-                    <input type="radio" name="hidepass" id="hidepass" value="true" checked="checked">
-                    <label for="showpass">
-                        Show
-                    </label>
-                    <input type="radio" name="hidepass" id="showpass" value="false">
-                </fieldset>
-                <div data-role="fieldcontain">
-                    <label for="salt">
-                        Salt:
-                    </label>
-                    <input id="salt" name="salt" type="password" class="password input" size="48" maxlength="45"/><input type="button" value="GUID" id="guidBtn" data-inline="true"/>
-                </div>
-                <div data-role="fieldcontain">
-                    <label for="site">
-                        Site Tag:
-                    </label>
-                    <input type="text" id="site" class="input" name="site" value=""/><input type="button" value="Bump" id="bumpBtn" data-inline="true"/>
-                </div>
-                <div data-role="fieldcontain">
-                    <label for="password">
-                        Password:
-                    </label>
-                    <input type="password" id="password" name="password" class="password input" value="" />
-                </div>
-                <div data-role="fieldcontain">
-                    <label for="passlength">
-                        Password Length:
-                    </label>
-                    <input type="range" name="passlength" id="passlength" value="10" min="2" max="26" class="input"/>
-                </div>
-                <div data-role="fieldcontain">
-                    <label for="strength">
-                        Strength:
-                    </label>
-                    <select id="strength" name="strength" class="input">
-                        <option value="2" selected>Alphanumeric+Special</option>
-                        <option value="1">Alphanumeric</option>
-                        <option value="0">Numeric</option>
-                    </select>
-                </div>
-                <div data-role="fieldcontain">
-                    <label for="hash">
-                        Hash:
-                    </label>
-                    <input id="hash" readonly="true" name="hash" type="text" size="48" maxlength="45"/>
-                </div>
+            <div data-role="fieldcontain">
+                <label for="salt">Salt:</label>
+                <input id="salt" name="salt" type="password" class="password input" size="48" maxlength="45"/><input type="button" value="GUID" id="guidBtn" data-inline="true"/>
             </div>
-            <div data-role="footer">
-                <h4>All Rights Reserved. Licenced under the MPL 1.1</h4>
+            <div data-role="fieldcontain">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="password input" value="" />
+            </div>
+            <div data-role="fieldcontain">
+                <label for="passlength">Password Length:</label>
+                <input type="range" name="passlength" id="passlength" value="10" min="2" max="26" class="input"/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="strength">Strength:</label>
+                <select id="strength" name="strength" class="input">
+                    <option value="2" selected>Alphanumeric+Special</option>
+                    <option value="1">Alphanumeric</option>
+                    <option value="0">Numeric</option>
+                </select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="hash">Hash:</label>
+                <input id="hash" readonly="true" name="hash" type="text" size="48" maxlength="45"/>
             </div>
         </div>
-        <!-- /footer -->
-    </body>
+        <div data-role="footer">
+            <h4>All Rights Reserved. Licenced under the MPL 1.1</h4>
+        </div>
+    </div>
+</body>
 </html>
