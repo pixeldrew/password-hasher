@@ -9,6 +9,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.mobile-1.0a4.1.min.js"></script>
     <script src="js/jquery-ui.custom.min.js"></script>
+    <script src="js/lc_prod.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/sha1.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/passhashcommon.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/main.js"></script>
@@ -20,18 +21,19 @@
         </div>
         <div data-role="content">
             <div data-role="fieldcontain">
- 				<fieldset data-role="controlgroup">
-					<input type="checkbox" name="showpass" id="showpass" class="custom" />
-					<label for="showpass">Show Password Fields</label>
-    			</fieldset>
-			</div>
+                <label for="hidepass">Passwords:</label>
+                <select name="hidepass" id="hidepass" data-role="slider">
+                    <option value="true">Hidden</option>
+                    <option value="false">Shown</option>
+                </select>
+            </div>
             <div data-role="fieldcontain">
-                <label for="site">Site Tag:</label>
-                <input type="text" id="site" class="input" name="site" value=""/><input type="button" value="Bump" id="bumpBtn" data-inline="true"/>
+                <label for="sitelabel">Site Label:</label>
+                <input type="text" id="sitelabel" class="input" name="sitelabel" value=""/><input type="button" value="Bump" id="bumpBtn" data-inline="true"/><input type="button" value="Delete" id="deleteBtn" data-inline="true"/>
             </div>
             <div data-role="fieldcontain">
                 <label for="salt">Salt:</label>
-                <input id="salt" name="salt" type="password" class="password input" size="48" maxlength="45"/><input type="button" value="GUID" id="guidBtn" data-inline="true"/>
+                <input id="salt" name="salt" type="password" class="password input" size="48" maxlength="45"/><input type="button" value="Generate a UUID" id="uuidBtn" data-inline="true"/>
             </div>
             <div data-role="fieldcontain">
                 <label for="password">Password:</label>
@@ -44,13 +46,13 @@
             <div data-role="fieldcontain">
                 <label for="strength">Strength:</label>
                 <select id="strength" name="strength" class="input">
-                    <option value="2" selected>Alphanumeric+Special</option>
-                    <option value="1">Alphanumeric</option>
                     <option value="0">Numeric</option>
+					<option value="1">Alphanumeric</option>
+					<option value="2" selected>Alphanumeric+Special</option>
                 </select>
             </div>
             <div data-role="fieldcontain">
-                <label for="hash">Hash:</label>
+                <label for="hash">Hashed Password:</label>
                 <input id="hash" readonly="true" name="hash" type="text" size="48" maxlength="45"/>
             </div>
         </div>

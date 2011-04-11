@@ -17,8 +17,6 @@
  * Portions created by the Initial Developer are Copyright (C) 2010
  * the Initial Developer. All Rights Reserved.
  *
- * Contributor(s): (none)
- *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
  * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -32,6 +30,7 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
+
 String.prototype.startsWith = function(str) {
 	return (this.match("^" + str) == str);
 };
@@ -40,48 +39,96 @@ String.prototype.substringAfter = function(str) {
 	return (this.substring(this.indexOf(str) + str.length));
 };
 
-String.GUID = function() {
+String.UUID = function() {
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 		var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 		return v.toString(16);
 	}).toUpperCase();
 };
 
-function generateGuid() {
-	$('#salt').val(String.GUID());
-	update();
+function generateUuid() {
+	$('#salt').val(String.UUID());
+	updateDisplay();
+}
+
+var pconfig;
+pconfig = new Lawnchair({
+	display : "Phasher Config",
+	name : 'pconfig',
+	version : "1.0",
+	adaptor : 'webkit'
+}, function(lc) {
+	return lc;
+});
+
+function init() {
+
+	pconfig.all(function(c) {
+
+		c = $.map(c, function(item) {
+			return {
+				value : item.key,
+				label : item.sitelabel
+			};
+		});
+
+		$('#sitelabel').autocomplete({
+			source : c
+		});
+
+		/* fix for mobile */
+		$('#sitelabel').data("autocomplete")._renderItem = function(ul, item) {
+			return $("<li></li>").data("item.autocomplete", item).append(
+					$("<a></a>").attr({
+						href : '#'
+					}).html(item.label)).appendTo(ul);
+		};
+	});
+
+}
+
+function updateConfig() {
+	var config = getConfig();
+
+	if (config.key && config.key != "" && config.password)
+		pconfig.save(config);
+}
+
+function deleteConfig() {
+
 }
 
 function generateHash(config, input) {
-	var site = config.site;
+	var sitelabel = config.sitelabel;
 
-	if (!site.startsWith("compatible:")) {
-		site = PassHashCommon.generateHashWord(config.salt, site, 24, true, // require
-		true, // require punctuation
-		true, // require mixed case
-		false, // require special characters
-		false // only digits
+	// hash the sitelabel with the salt
+	if (!sitelabel.startsWith("compatible:")) {
+		sitelabel = PassHashCommon.generateHashWord(config.salt, sitelabel, 24,
+				true, // require
+				true, // require punctuation
+				true, // require mixed case
+				false, // require special characters
+				false // only digits
 		);
 	} else {
-		site = site.substringAfter(":");
+		sitelabel = sitelabel.substringAfter(":");
 	}
 
-	return PassHashCommon.generateHashWord(site, input, config.length, true, // require
-	config.strength > 1, // require punctuation
-	true, // require mixed case
-	config.strength < 2, // require special characters
-	config.strength == 0 // only digits
+	// hash the password with the hashed salt
+	return PassHashCommon.generateHashWord(sitelabel, input, config.length,
+			true, // require
+			config.strength > 1, // require punctuation
+			true, // require mixed case
+			config.strength < 2, // require special characters
+			config.strength == 0 // only digits
 	);
 }
 
 function togglePasswords(e) {
 	var type;
-	console.log('togglePass', $('#showpass').attr("checked"), e);
-	if ($('#showpass').attr("checked") == "true") {
-		type = "password";
-	} else {
-		type = "text";
-	}
+
+	type = ($('#hidepass option:selected').val() == "true") ? "password"
+			: "text";
 
 	$('.password').each(function(i) {
 		var ele = $(this).get(0);
@@ -89,76 +136,78 @@ function togglePasswords(e) {
 	});
 }
 
-function bumpLabel() {
-	var re = new RegExp("^([^:]+?)(:([0-9]+))?$");
-	var site = $('#site').val();
-	if (site.startsWith("compatible:")) {
-		site = site.substringAfter("compatible:");
+function bumpLabel(e) {
+	var bump = 1, re = new RegExp("^([^:]+?)(:([0-9]+))?$"), label = $("#sitelabel").val(), matcher;
+
+	if (label.startsWith("compatible:")) {
+		label = label.substringAfter("compatible:");
 	}
-	var matcher = re.exec(site);
-	var bump = 1;
+	
+	matcher = re.exec(label);
+
 	if (null != matcher[3]) {
-		site = matcher[1];
+		label = matcher[1];
 		bump += parseInt(matcher[3]);
 	}
-	$("#site").val(site + ":" + bump);
+	
+	$("#sitelabel").val(label + ":" + bump);
+	$('#sitelabel').trigger('change');
 }
 
-function update() {
-	var hash = '', config = {};
-	config.site = $('#site').val();
+function updateDisplay(e) {
+	var hash = '', config = getConfig();
+
+	if($(e.currentTarget).attr('id') == 'sitelabel' && e.type == 'autocompletechange') {
+		
+		pconfig.find('r.key == "' + $('#sitelabel').val() + '"', loadConfig);
+		
+		return false;
+	}
+	
+	hash = generateHash(config, config.password);
+
+	$('#hash').val(hash);
+}
+
+function loadConfig(r){
+	
+	$('#salt').val(r.salt);
+	$("#passlength").val(r.length).slider("refresh");
+	
+	$("#strength")[0].selectedIndex = r.strength;
+	$('#strength').selectmenu("refresh");
+	
+	$('#password').val(r.password);
+
+	$('#sitelabel').trigger('change');
+}
+
+function getConfig() {
+	var config = {};
+	
+	config.key = $('#sitelabel').val();
+	config.sitelabel = $('#sitelabel').val();
 	config.salt = $('#salt').val();
 	config.length = $("#passlength").val();
 	config.strength = $('#strength').val();
-	hash = generateHash(config, $('#password').val());
-
-	$('#hash').val(hash);
+	config.password = $('#password').val();
+	
+	return config;
 }
 
 $('#mainPage').live('pagecreate', function() {
 
 	$('#bumpBtn').click(bumpLabel);
-	$('#guidBtn').click(generateGuid);
+	$('#uuidBtn').click(generateUuid);
 
-	$('#showpass').bind('tap click', togglePasswords);
-	$('.input').bind('keydown keyup change', update);
+	$('#hidepass').bind('change', togglePasswords);
+	
+	$('.input').bind('change autocompletechange', updateDisplay);
+	$('.input').bind('blur', updateConfig);
 
 	$('#hash').bind("click", function() {
 		$('#hash').get(0).select();
 	});
 });
 
-$(function() {
-	$('#site').autocomplete(
-			{
-				source : function(request, response) {
-					var data = {
-						results : [ {
-							data : {
-								fullName : "test",
-								id : "test"
-							}
-						} ]
-					};
-
-					response($.map(data.results, function(item) {
-						return {
-							label : '<span>'
-									+ item.data.fullName + '</span>',
-							value : item.data.id
-						};
-					}));
-				}
-
-			});
-
-	// override private autocomplete method which encodes html and creates
-	// anchor
-	// with no href
-	$('#site').data("autocomplete")._renderItem = function(ul, item) {
-		return $("<li></li>").data("item.autocomplete", item).append(
-				$("<a></a>").attr({
-					href : '#'
-				}).html(item.label)).appendTo(ul);
-	};
-});
+$(init);
