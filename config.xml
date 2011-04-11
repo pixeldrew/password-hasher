@@ -9,7 +9,7 @@
     </name>
     
     <description>
-        A simple password hasher, with HTML5 storage. Based on the original Chrome extention password hasher plus.
+        A simple password hasher, with HTML5 storage. Based on the original Chrome extention Password Hasher plus.
     </description>
     
     <author href="https://github.com/pixeldrew"
