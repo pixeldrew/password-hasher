@@ -7,9 +7,9 @@ A simple password hasher, with HTML5 storage. Based on the original Chrome exten
 Installation
 -----------
 
-    Available on the Android Market place at https://market.android.com/details?id=net.pixelburn.passwordhasher
-    
-    <img src="http://chart.apis.google.com/chart?cht=qr&chs=351x351&chl=http%3A%2F%2Fmarket.android.com%2Fdetails%3Fid%3Dnet.pixelburn.passwordhasher" width=200>
+Available on the Android Market place at https://market.android.com/details?id=net.pixelburn.passwordhasher
+
+<img src="http://chart.apis.google.com/chart?cht=qr&chs=351x351&chl=http%3A%2F%2Fmarket.android.com%2Fdetails%3Fid%3Dnet.pixelburn.passwordhasher" width=200>
 
 
 Contributing
