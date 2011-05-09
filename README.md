@@ -17,7 +17,7 @@ Contributing
 
 1. Fork it.
 2. Create a branch (`git checkout -b phasher`)
-3. Commit your changes (`git commit -am "Added Snarkdown"`)
+3. Commit your changes (`git commit -am "Added Password List"`)
 4. Push to the branch (`git push origin phasher`)
 5. Create an [Issue][1] with a link to your branch
 6. Enjoy a refreshing Mug rootbeer and wait

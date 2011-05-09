@@ -2,7 +2,7 @@
 <widget xmlns="http://www.w3.org/ns/widgets"
  xmlns:gap="http://phonegap.com/ns/1.0"
  id="net.pixelburn.passwordhasher"
- version="1.0.1">
+ version="1.0.2">
     
     <name>
         PHasher+
@@ -24,7 +24,6 @@
     <icon src="icon.png" gap:role="default"/>
     
     <feature name="http://api.phonegap.com/1.0/network"/>
-	<feature name="http://api.phonegap.com/1.0/file"/>
-	<feature name="http://api.phonegap.com/1.0/geolocation"/>
+	
     
 </widget>
