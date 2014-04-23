@@ -195,7 +195,9 @@ function getConfig() {
 	return config;
 }
 
-$('#mainPage').live('pagecreate', function() {
+$(document).on('deviceready', function() {
+
+    init()
 
 	$('#bumpBtn').click(bumpLabel);
 	$('#uuidBtn').click(generateUuid);
@@ -209,5 +211,3 @@ $('#mainPage').live('pagecreate', function() {
 		$('#hash').get(0).select();
 	});
 });
-
-$(init);
