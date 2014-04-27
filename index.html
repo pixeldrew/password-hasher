@@ -1,64 +1,32 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>PHasher+</title>
-    <link rel="stylesheet" href="css/redmond/jquery-ui.custom.css" />
-    <link rel="stylesheet" href="css/jquery.mobile-1.0a4.1.min.css" />
-    <link rel="stylesheet" href="css/main.css"/>
-    <script src="js/phonegap.0.9.4.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.mobile-1.0a4.1.min.js"></script>
-    <script src="js/jquery-ui.custom.min.js"></script>
-    <script src="js/lc_prod.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/sha1.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/passhashcommon.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/main.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <title>PHasher1+</title>
+
+    <link href="css/phasher.css" rel="stylesheet">
+
+    <script src="phonegap.js"></script>
+
 </head>
-<body>
-    <div data-role="page" id="mainPage">
-        <div data-role="header">
-            <h1>PHasher+</h1>
-        </div>
-        <div data-role="content">
-            <div data-role="fieldcontain">
-                <label for="hidepass">Passwords:</label>
-                <select name="hidepass" id="hidepass" data-role="slider">
-                    <option value="true">Hidden</option>
-                    <option value="false">Shown</option>
-                </select>
-            </div>
-            <div data-role="fieldcontain">
-                <label for="sitelabel">Site Label:</label>
-                <input type="text" id="sitelabel" class="input" name="sitelabel" value=""/><input type="button" value="Bump" id="bumpBtn" data-inline="true"/><input type="button" value="Delete" id="deleteBtn" data-inline="true"/>
-            </div>
-            <div data-role="fieldcontain">
-                <label for="salt">Salt:</label>
-                <input id="salt" name="salt" type="password" class="password input" size="48" maxlength="45"/><input type="button" value="Generate a UUID" id="uuidBtn" data-inline="true"/>
-            </div>
-            <div data-role="fieldcontain">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" class="password input" value="" />
-            </div>
-            <div data-role="fieldcontain">
-                <label for="passlength">Password Length:</label>
-                <input type="range" name="passlength" id="passlength" value="10" min="2" max="26" class="input"/>
-            </div>
-            <div data-role="fieldcontain">
-                <label for="strength">Strength:</label>
-                <select id="strength" name="strength" class="input">
-                    <option value="0">Numeric</option>
-					<option value="1">Alphanumeric</option>
-					<option value="2" selected>Alphanumeric+Special</option>
-                </select>
-            </div>
-            <div data-role="fieldcontain">
-                <label for="hash">Hashed Password:</label>
-                <input id="hash" readonly="true" name="hash" type="text" size="48" maxlength="45"/>
-            </div>
-        </div>
-        <div data-role="footer">
-            <h4>All Rights Reserved. Licenced under the MPL 1.1</h4>
-        </div>
-    </div>
+<body ng-app="phasher">
+
+
+<ion-tabs class="tabs-positive tabs-icon-only">
+
+    <ion-tab title="Site Tags" icon-on="ion-pricetags" href="#/home" icon-off="ion-pricetags">
+        <ion-nav-view name="tab-home"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab title="Settings" icon-on="ion-gear-b" href="#/settings" icon-off="ion-gear-b">
+        <ion-nav-view name="tab-settings" ></ion-nav-view>
+    </ion-tab>
+
+</ion-tabs>
+
+<script src="bower_components/requirejs/require.js" data-main="js/main.js"></script>
+
 </body>
 </html>

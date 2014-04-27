@@ -1,0 +1,57 @@
+<ion-view class="slide-in-right">
+    <div>
+        <ion-header-bar class="bar-positive" title="Defaults"></ion-header-bar>
+        <ion-content class="has-header padding">
+            <div class="list">
+
+                <div class="item item-input static">
+                    <div class="col">
+                        <label class=" item-stacked-label no-left-padding">
+                            <span class="input-label">Length:</span>
+                            <input type="text">
+                        </label>
+                    </div>
+                    <div class="col col-75">
+
+                        <input type="range" class="range" min="2" max="26" >
+
+                    </div>
+
+                </div>
+
+                <div class="item item-input item-select">
+                    <div class="input-label">
+                        Strength:
+                    </div>
+                    <select ng-model="config.strength">
+                        <option value="2">Alphanumeric+Special</option>
+                        <option value="1">Alphanumeric</option>
+                        <option value="0">Numeric</option>
+                    </select>
+                </div>
+
+                <div class="item item-input static">
+                    <div class="col col-75">
+                        <label class=" item-stacked-label no-left-padding">
+                            <span class="input-label">Seed:</span>
+                            <input type="text" ng-model="config.seed" ng-change="saveAndHash()">
+                        </label>
+                    </div>
+                    <div class="col">
+                        <button class="button icon ion-key button-seed" ng-click="newSeed()"></button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="button ">
+                Export
+            </button>
+
+            <button class="button ">
+                About
+            </button>
+
+        </ion-content>
+
+    </div>
+</ion-view>

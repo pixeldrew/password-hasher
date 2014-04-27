@@ -1,0 +1,83 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+*/
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #4a87ee !default;
+$calm:                            #43cee6 !default;
+$balanced:                        #66cc33 !default;
+$energized:                       #f0b840 !default;
+$assertive:                       #ef4e3a !default;
+$royal:                           #8a6de9 !default;
+$dark:                            #444 !default;
+
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../bower_components/ionic/release/fonts" !default;
+
+// Include all of Ionic
+@import "../bower_components/ionic/scss/ionic";
+
+
+.static {
+  position:static;
+}
+
+/* Typeahead stuff
+----------------------------*/
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  list-style: none;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+  width:95%;
+}
+.dropdown-menu li a {
+  display: block;
+  padding: 3px 20px;
+  color: #333333;
+  white-space: nowrap;
+}
+.dropdown-menu .active a, .dropdown-menu .active a:hover, .dropdown-menu .active a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: $positive;
+  outline: 0;
+}
+
+.button-bump,.button-seed {
+  float:right;
+  width:54px;
+}
+
+.no-left-padding {
+  padding-left:0;
+}
+
+.advanced-toggle {
+  padding-left:5px;
+}
+
+input.hashed-output[disabled]{
+  background: $light;
+}
+
+input.range {
+  width:100%;
+}
