@@ -21,9 +21,6 @@
     <gap:plugin name="nl.x-services.plugins.toast" version="2.0"/>
     <gap:plugin name="com.verso.cordova.clipboard" version="0.1.0"/>
     <gap:plugin name="com.borismus.webintent" version="1.0.0" />
-    <gap:plugin name="org.apache.cordova.device" version="0.2.9" />
-
-    <feature name="http://api.phonegap.com/1.0/device"/>
 
     <feature name="Toast">
         <param name="ios-package" value="Toast" />
