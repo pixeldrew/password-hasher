@@ -1,34 +1,35 @@
 {
-  "name": "phasher+",
-  "version": "1.0.2",
-  "homepage": "https://github.com/pixeldrew/password-hasher",
-  "authors": [
-    "Drew Foehn <drew@pixelburn.net>"
-  ],
-  "description": "password hasher port",
-  "main": "index.html",
-  "moduleType": [
-    "amd"
-  ],
-  "keywords": [
-    "password",
-    "hashing",
-    "crypto"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "requirejs": "~2.1.11",
-    "lodash": "~2.4.1",
-    "lawnchair": "f9d28360a923aa3c2d1e7a313721b34ebfd60d33",
-    "ionic": "v1.0.0-beta.1",
-    "ionic-contrib-frosted-glass": "ee2df7164addcdfff4cc2483e1a2b708301271ee",
-    "jquery": "2.1.0"
-  }
+    "name": "phasher+",
+    "version": "1.0.2",
+    "homepage": "https://github.com/pixeldrew/password-hasher",
+    "authors": [
+        "Drew Foehn <drew@pixelburn.net>"
+    ],
+    "description": "password hasher port",
+    "main": "index.html",
+    "moduleType": [
+        "amd"
+    ],
+    "keywords": [
+        "password",
+        "hashing",
+        "crypto"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "requirejs": "~2.1.11",
+        "lodash": "~2.4.1",
+        "lawnchair": "f9d28360a923aa3c2d1e7a313721b34ebfd60d33",
+        "ionic": "v1.0.0-beta.1",
+        "ionic-contrib-frosted-glass": "ee2df7164addcdfff4cc2483e1a2b708301271ee",
+        "jquery": "1.11.0",
+        "almond": "~0.2.9"
+    }
 }

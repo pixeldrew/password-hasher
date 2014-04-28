@@ -8,6 +8,7 @@
     <author email="drew@pixelburn.net" href="https://github.com/pixeldrew">
         Drew Foehn
     </author>
+
     <content src="index.html"/>
 
     <icon src="res/icon/android/icon.png" gap:role="default"/>
@@ -38,11 +39,14 @@
     <preference name="UIWebViewBounce" value="false"/>
     <preference name="DisallowOverscroll" value="true"/>
 
+    <preference name="enableViewPortScale" value="true" />
+    <preference name="android-windowSoftInputMode" value="stateVisible" />
+
     <preference name="orientation" value="portrait"/>
 
     <preference name="target-device" value="universal"/>
     <!-- all: possible values handset, tablet, or universal -->
-    <preference name="fullscreen" value="true"/>
+    <preference name="fullscreen" value="false"/>
     <!-- all: hides the status bar at the top of the screen -->
     <preference name="android-minSdkVersion" value="18"/>
     <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
