@@ -1,6 +1,6 @@
 {
   "name": "phasher",
-  "version": "1.2.0",
+  "version": "1.0.6",
   "author": "Drew Foehn <drew@pixelburn.net>",
   "description": "A simple password hasher, with HTML5 storage. Based on the original Chrome extention Password Hasher plus. Built with the ionic framework",
   "repository": {

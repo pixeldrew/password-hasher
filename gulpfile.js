@@ -33,7 +33,7 @@ gulp.task('watch', function() {
 
 gulp.task('bump-patch', function(){
     gulp.src(['./package.json', './bower.json'])
-        .pipe(bump({type:'patch'}))
+        .pipe(bump())
         .pipe(gulp.dest('./'));
 });
 
@@ -51,5 +51,6 @@ gulp.task('bump-major', function(){
 
 gulp.task('release-patch', ['sass', 'js', 'bump-patch']);
 gulp.task('release-feature', ['sass', 'js', 'bump-minor']);
+gulp.task('release-major', ['sass', 'js', 'bump-major']);
 
 gulp.task('default', ['sass', 'js']);
