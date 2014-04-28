@@ -18,9 +18,9 @@
         <gap:platform name="android" minVersion="4.4"/>
     </gap:platforms>
 
-    <gap:plugin name="nl.x-services.plugins.toast" version="2.0"/>
+    <gap:plugin name="nl.x-services.plugins.toast" version="1.0"/>
     <gap:plugin name="com.verso.cordova.clipboard" version="0.1.0"/>
-    <gap:plugin name="com.borismus.webintent" version="0.1.0" />
+    <gap:plugin name="net.tunts.webintent" version="0.2.1" />
 
     <feature name="Toast">
         <param name="ios-package" value="Toast" />
