@@ -1,27 +1,49 @@
-define(['phasher', 'lawnchair', 'lodash', 'jquery'], function(phasher, LawnChair, _, $) {
+/*global Lawnchair*/
+define(['phasher', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(phasher, _, $, Lawnchair) {
 
     var UserData = function() {
 
-        }, connection = new LawnChair({name:'phasher',
+    }, connection = Lawnchair({name: 'phasher',
         display: "Phasher User Data",
         version: "1.0"
     }), defaultConfig = {
         privateSeed: String.UUID(),
-        defaultStrength:2,
+        defaultStrength: 2,
         defaultLength: 8
     };
 
-
     UserData.prototype = {
 
-        saveTag : function(config) {
+        saveTag: function(id, config) {
 
-        },
-        saveConfig : function() {
+            var obj = $.extend({}, config);
 
+            obj.key = 'tags:' + id;
+
+            connection.save(obj);
         },
-        getDefaults : function() {
-            // query database look for config
+        getTag: function(id) {
+
+            var d = $.Deferred();
+
+            connection.get('tags:' + id, function(tag) {
+                d.resolve(tag)
+            });
+
+            return d.promise();
+        },
+        saveConfig: function(config) {
+
+            var newConfig = {};
+
+            newConfig.defaultLength = config.length;
+            newConfig.defaultStrength = config.strength;
+            newConfig.privateSeed = config.seed;
+            newConfig.key = 'options';
+
+            connection.save(newConfig);
+        },
+        getDefaults: function() {
 
             var d = $.Deferred();
             connection.get('options', function(config) {
@@ -39,25 +61,47 @@ define(['phasher', 'lawnchair', 'lodash', 'jquery'], function(phasher, LawnChair
 
             return d.promise();
         },
-        getAllTags : function() {
+        getAllTags: function() {
 
             var d = $.Deferred();
 
-            return d.resolve(['facebook', 'somethingelse', 'blah', 'yep', 'somethingelse', 'fridaythethirtheenth']);
+            connection.keys(function(keys) {
+
+                var tags = [], tagRe = /^(tags\:)+/;
+
+                _(keys).each(function(key) {
+                    if(tagRe.test(key)) {
+                        tags.push(key.replace(tagRe, ''));
+                    }
+                });
+
+                d.resolve(tags)
+            });
+
+            return d.promise();
 
         },
-        getExport : function() {
+        getExport: function() {
 
-            return JSON.stringify({});
+            var d = $.Deferred();
+
+            connection.all(function(db) {
+                _(db).each(function(val) {
+                    delete val.key;
+                });
+                d.resolve(JSON.stringify(db));
+            });
+
+            return d.promise();
         }
 
     };
 
-    phasher.factory('UserData', [function() {
+    phasher.factory('UserData', function() {
 
         return new UserData();
 
-    }]);
+    });
 
     return UserData;
 });

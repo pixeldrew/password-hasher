@@ -21,6 +21,8 @@ $ionicons-font-path: "../bower_components/ionic/release/fonts" !default;
 // Include all of Ionic
 @import "../bower_components/ionic/scss/ionic";
 
+@import "../bower_components/ionic-contrib-frosted-glass/ionic.contrib.frostedGlass.css";
+
 
 .static {
   position:static;

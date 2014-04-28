@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="net.pixelburn.passwordhasher" version="1.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="net.pixelburn.passwordhasher" version="1.0.3" xmlns="http://www.w3.org/ns/widgets"
+        xmlns:gap="http://phonegap.com/ns/1.0" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>PHasher+</name>
     <description>
         A simple password hasher. Based on the original Chrome extention Password Hasher plus.
@@ -7,29 +8,49 @@
     <author email="drew@pixelburn.net" href="https://github.com/pixeldrew">
         Drew Foehn
     </author>
-    <content src="index.html" />
+
+    <content src="index.html"/>
 
     <icon src="res/icon/android/icon.png" gap:role="default"/>
-    <icon src="res/icon/android/icon-72-hdpi.png" gap:platform="android" gap:density="hdpi" />
+    <icon src="res/icon/android/icon-72-hdpi.png" gap:platform="android" gap:density="hdpi"/>
 
     <gap:platforms>
         <gap:platform name="android" minVersion="4.4"/>
     </gap:platforms>
 
-    <gap:plugin name="nl.x-services.plugins.toast" version="1.0" />
-    <gap:plugin name="com.verso.cordova.clipboard" version="0.1.0" />
+    <gap:plugin name="nl.x-services.plugins.toast" version="2.0"/>
+    <gap:plugin name="com.verso.cordova.clipboard" version="0.1.0"/>
+    <gap:plugin name="com.borismus.webintent" version="1.0.0" />
+    <gap:plugin name="org.apache.cordova.device" version="0.2.9" />
 
-    <feature name="http://api.phonegap.com/1.0/device" />
+    <feature name="http://api.phonegap.com/1.0/device"/>
 
-    <access origin="*" />
-    <preference name="webviewbounce" value="false" />
-    <preference name="UIWebViewBounce" value="false" />
-    <preference name="DisallowOverscroll" value="true" />
+    <feature name="Toast">
+        <param name="ios-package" value="Toast" />
+    </feature>
 
-    <preference name="orientation"                value="default" />        <!-- all: default means both landscape and portrait are enabled -->
-    <preference name="target-device"              value="universal" />      <!-- all: possible values handset, tablet, or universal -->
-    <preference name="fullscreen"                 value="false" />           <!-- all: hides the status bar at the top of the screen -->
-    <preference name="android-minSdkVersion"      value="18" />              <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
-    <preference name="android-installLocation"    value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
+    <feature name="Toast">
+        <param name="android-package" value="nl.xservices.plugins.Toast" />
+    </feature>
+
+    <access origin="http://localhost/*"/>
+
+    <preference name="webviewbounce" value="false"/>
+    <preference name="UIWebViewBounce" value="false"/>
+    <preference name="DisallowOverscroll" value="true"/>
+
+    <preference name="enableViewPortScale" value="true" />
+    <preference name="android-windowSoftInputMode" value="stateVisible" />
+
+    <preference name="orientation" value="portrait"/>
+
+    <preference name="target-device" value="universal"/>
+    <!-- all: possible values handset, tablet, or universal -->
+    <preference name="fullscreen" value="false"/>
+    <!-- all: hides the status bar at the top of the screen -->
+    <preference name="android-minSdkVersion" value="18"/>
+    <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
+    <preference name="android-installLocation" value="auto"/>
+    <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
 
 </widget>
