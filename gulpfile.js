@@ -3,6 +3,9 @@ var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
+var requireConfig = require('./build.json');
+var rjs = require('gulp-requirejs');
+
 
 var paths = {
   sass: ['./css/**/*.scss']
@@ -20,8 +23,12 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
+gulp.task('build', function() {
+    rjs(requireConfig).pipe(gulp.dest('./'));
+});
+
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
 });
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'build']);

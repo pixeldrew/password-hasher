@@ -2,7 +2,7 @@
   "name": "phasher",
   "version": "1.0.3",
   "author" : "Drew Foehn <drew@pixelburn.net>",
-  "description": "Phasher+",
+  "description": "PHasher+",
   "repository": "https://github.com/pixeldrew/password-hasher.git",
   "main": "index.html",
   "license": "MIT",
