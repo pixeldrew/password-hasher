@@ -4,8 +4,8 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var requireConfig = require('./build.json');
+var packageInfo = require('./package.json');
 var rjs = require('gulp-requirejs');
-
 
 var paths = {
   sass: ['./css/**/*.scss']

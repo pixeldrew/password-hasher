@@ -8,13 +8,8 @@
 
     <link href="css/phasher.css" rel="stylesheet">
 
-    <script>window.name = "NG_DEFER_BOOTSTRAP!";</script>
-
-    <script src="phonegap.js"></script>
-
 </head>
 <body ng-app="phasher">
-
 
 <ion-tabs class="tabs-positive tabs-icon-only">
 
@@ -29,7 +24,11 @@
 </ion-tabs>
 
 <script type="text/javascript">
-    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+
+    window.name = "NG_DEFER_BOOTSTRAP!";
+
+    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) || location.search.indexOf('debug')>=0) {
+        document.write('<script src="phonegap.js"><\/script>');
         document.write('<script src="js/main.min.js" ><\/script>');
     } else {
         document.write('<script src="bower_components/requirejs/require.js" data-main="js/config.js"><\/script>');

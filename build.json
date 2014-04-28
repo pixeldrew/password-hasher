@@ -65,6 +65,6 @@
     "name": "../bower_components/almond/almond",
     "include": ["boot"],
     "wrapShim" : true,
-    "optimize": "none",
+    "optimize": "uglify2",
     "out": "js/main.min.js"
 }
