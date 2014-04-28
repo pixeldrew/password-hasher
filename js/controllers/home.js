@@ -90,7 +90,10 @@ define(['phasher', 'util/integer', 'directives/site-list', 'factories/password-h
         };
 
         $scope.copy = function() {
-            // todo copy to clipboard
+            window.plugins.clipboard.copy($scope.hashedPassword,
+                function() {
+                    window.plugins.toast.showShortTop('Copied Hashed Password');
+                });
         };
 
         $scope.saveConfig = function() {

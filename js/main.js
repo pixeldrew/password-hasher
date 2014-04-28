@@ -5,6 +5,7 @@ require.config({
     paths: {
         ionic: '../bower_components/ionic/release/js/ionic',
         'ionic-angular': '../bower_components/ionic/release/js/ionic-angular',
+        'ionic-frostedglass': '../bower_components/ionic-contrib-frosted-glass/ionic.contrib.frostedGlass',
         'angular': '../bower_components/angular/angular',
         'angular-animate': '../bower_components/angular-animate/angular-animate',
         'angular-sanitize': '../bower_components/angular-sanitize/angular-sanitize',

@@ -17,11 +17,20 @@
         <gap:platform name="android" minVersion="4.4"/>
     </gap:platforms>
 
-    <gap:plugin name="nl.x-services.plugins.toast" version="1.0"/>
+    <gap:plugin name="nl.x-services.plugins.toast" version="2.0"/>
     <gap:plugin name="com.verso.cordova.clipboard" version="0.1.0"/>
-    <gap:plugin name="com.borismus.webintent" version="0.1.0" />
+    <gap:plugin name="com.borismus.webintent" version="1.0.0" />
+    <gap:plugin name="org.apache.cordova.device" version="0.2.9" />
 
     <feature name="http://api.phonegap.com/1.0/device"/>
+
+    <feature name="Toast">
+        <param name="ios-package" value="Toast" />
+    </feature>
+
+    <feature name="Toast">
+        <param name="android-package" value="nl.xservices.plugins.Toast" />
+    </feature>
 
     <access origin="http://localhost/*"/>
 
@@ -33,7 +42,7 @@
 
     <preference name="target-device" value="universal"/>
     <!-- all: possible values handset, tablet, or universal -->
-    <preference name="fullscreen" value="false"/>
+    <preference name="fullscreen" value="true"/>
     <!-- all: hides the status bar at the top of the screen -->
     <preference name="android-minSdkVersion" value="18"/>
     <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->

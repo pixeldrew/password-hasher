@@ -28,6 +28,7 @@
     "lodash": "~2.4.1",
     "lawnchair": "f9d28360a923aa3c2d1e7a313721b34ebfd60d33",
     "ionic": "v1.0.0-beta.1",
+    "ionic-contrib-frosted-glass": "ee2df7164addcdfff4cc2483e1a2b708301271ee",
     "jquery": "2.1.0"
   }
 }

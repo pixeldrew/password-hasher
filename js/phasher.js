@@ -1,4 +1,4 @@
-define(['angular', 'jquery', 'lawnchair', 'ionic-angular', 'util/string'], function(angular, $, Lawnchair) {
+define(['angular', 'jquery', 'lawnchair', 'ionic-angular', 'ionic-frostedglass', 'util/string'], function(angular, $, Lawnchair) {
 
     'use strict';
 
