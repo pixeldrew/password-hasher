@@ -1,6 +1,6 @@
 {
   "name": "phasher",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "Drew Foehn <drew@pixelburn.net>",
   "description": "A simple password hasher, with HTML5 storage. Based on the original Chrome extention Password Hasher plus. Built with the ionic framework",
   "repository": {
@@ -15,8 +15,10 @@
     "gulp-concat": "^2.2.0",
     "gulp-minify-css": "^0.3.0",
     "gulp-rename": "^1.2.0",
+    "gulp-replace": "^0.2.0",
     "gulp-requirejs": "^0.1.3",
-    "gulp-sass": "^0.7.1"
+    "gulp-sass": "^0.7.1",
+    "semver": "^2.2.1"
   },
   "bugs": {
     "url": "https://github.com/pixeldrew/password-hasher/issues"
