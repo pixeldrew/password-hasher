@@ -31,6 +31,12 @@ gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
 });
 
+gulp.task('bump-patch', function(){
+    gulp.src(['./package.json', './bower.json'])
+        .pipe(bump({type:'patch'}))
+        .pipe(gulp.dest('./'));
+});
+
 gulp.task('bump-minor', function(){
     gulp.src(['./package.json', './bower.json'])
         .pipe(bump({type:'minor'}))
@@ -43,7 +49,7 @@ gulp.task('bump-major', function(){
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('release-patch', ['sass', 'js', 'bump-minor']);
-gulp.task('release-feature', ['sass', 'js', 'bump-major']);
+gulp.task('release-patch', ['sass', 'js', 'bump-patch']);
+gulp.task('release-feature', ['sass', 'js', 'bump-minor']);
 
 gulp.task('default', ['sass', 'js']);
