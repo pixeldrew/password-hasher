@@ -5,11 +5,12 @@
     "authors": [
         "Drew Foehn <drew@pixelburn.net>"
     ],
-    "description": "password hasher port",
+    "description":"A simple password hasher, with HTML5 storage. Based on the original Chrome extention Password Hasher plus. Built with the ionic framework",
     "main": "index.html",
     "moduleType": [
         "amd"
     ],
+    "private": true,
     "keywords": [
         "password",
         "hashing",
