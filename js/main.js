@@ -17,7 +17,7 @@ require.config({
         'crypto.SHA1': "../bower_components/cryptojs/lib/SHA1",
         'crypto.AES': "../bower_components/cryptojs/lib/AES",
         lawnchair: '../bower_components/lawnchair/src/Lawnchair',
-        'lawnchair-indexed-db': '../bower_components/lawnchair/src/adapters/indexed-db',
+        'lawnchair-webkit-sqlite': '../bower_components/lawnchair/src/adapters/webkit-sqlite',
         lodash: '../bower_components/lodash/dist/lodash',
         'lib': '../lib',
         'ui-bootstrap' : '../lib/ui-bootstrap-custom',
@@ -42,7 +42,7 @@ require.config({
         'angular-ui-router': {'deps': ['angular']},
         'ionic-angular': {'deps': ['angular-animate', 'angular-sanitize', 'angular-ui-router', 'ionic']},
         'lawnchair': {'exports': 'Lawnchair'},
-        'lawnchair-indexed-db' : {deps:['lawnchair']},
+        'lawnchair-webkit-sqlite' : {deps:['lawnchair']},
         'ui-bootstrap' : ['angular'],
         'ui-bootstrap-tpls' : ['angular', 'ui-bootstrap']
     }

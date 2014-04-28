@@ -1,4 +1,4 @@
-define(['phasher', 'directives/site-list', 'factories/password-hasher', 'factories/user-data'], function(phasher) {
+define(['phasher', 'util/integer', 'directives/site-list', 'factories/password-hasher', 'factories/user-data'], function(phasher, Integer) {
 
     function bumpTag(tag) {
         var bump = 1, re = new RegExp("^([^:]+?)(:([0-9]+))?$"), matcher;
@@ -24,8 +24,8 @@ define(['phasher', 'directives/site-list', 'factories/password-hasher', 'factori
 
         userData.getDefaults().then(function(config) {
             $scope.config.seed = config.seed;
-            $scope.config.length = config.length;
-            $scope.config.strength = config.strength;
+            $scope.config.length = new Integer(config.length);
+            $scope.config.strength = new Integer(config.strength);
         });
 
         userData.getAllTags().then(function(tags) {
@@ -34,26 +34,39 @@ define(['phasher', 'directives/site-list', 'factories/password-hasher', 'factori
 
         $scope.bump = function() {
             $scope.config.tag = bumpTag($scope.config.tag);
+            $scope.saveAndHash();
+        };
+
+        $scope.getConfig = function() {
+
+            userData.getTag($scope.config.tag).then(function(tag) {
+
+                if(tag) {
+                    $scope.config.seed = tag.seed;
+                    $scope.config.length = new Integer(tag.length);
+                    $scope.config.strength = new Integer(tag.strength);
+
+                    $scope.hashPassword();
+
+                    $scope.$apply();
+                }
+
+            });
+
         };
 
         $scope.newSeed = function() {
             $scope.config.seed = String.UUID();
-        };
-
-        $scope.changeStrength = function(val) {
-            $scope.config.strength = val;
-
-            $scope.hashPassword();
-
+            $scope.saveAndHash();
         };
 
         $scope.copySaveAndHash = function() {
-
+            $scope.copy();
             $scope.saveAndHash();
         };
 
         $scope.saveAndHash = function() {
-
+            $scope.saveConfig();
             $scope.hashPassword();
         };
 
@@ -66,12 +79,12 @@ define(['phasher', 'directives/site-list', 'factories/password-hasher', 'factori
 
             var salt = passwordHasher.generateHashWord($scope.config.seed, $scope.config.tag, 24, true, true, true, false, false);
 
-            $scope.hashedPassword = passwordHasher.generateHashWord(salt, $scope.config.password, $scope.config.length,
+            $scope.hashedPassword = passwordHasher.generateHashWord(salt, $scope.config.password, $scope.config.length.value,
                 true, // require
-                    $scope.config.strength > 1, // require punctuation
+                    $scope.config.strength.value > 1, // require punctuation
                 true, // require mixed case
-                    $scope.config.strength < 2, // require special characters
-                    $scope.config.strength == 0 // only digits
+                    $scope.config.strength.value < 2, // require special characters
+                    $scope.config.strength.value == 0 // only digits
             );
 
         };
@@ -81,8 +94,18 @@ define(['phasher', 'directives/site-list', 'factories/password-hasher', 'factori
         };
 
         $scope.saveConfig = function() {
-            if($scope.password !== '' && $scope.config.tag !== '') {
-                userData.saveTag($scope.config);
+            if($scope.config.password !== '' && $scope.config.tag !== '') {
+
+                var config = $.extend({}, $scope.config);
+
+                delete config.tag;
+                delete config.password;
+                delete config.showAdvanced;
+
+                config.length = config.length.value;
+                config.strength = config.strength.value;
+
+                userData.saveTag($scope.config.tag, config);
             }
         }
 

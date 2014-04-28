@@ -1,6 +1,6 @@
 <ion-view class="slide-in-right">
-    <div>
-        <ion-header-bar class="bar-positive" title="Defaults"></ion-header-bar>
+    <div ng-controller="SettingsCtrl">
+        <ion-header-bar class="bar-positive"><h1 class="title">PHasher+ Defaults</h1></ion-header-bar>
         <ion-content class="has-header padding">
             <div class="list">
 
@@ -8,13 +8,11 @@
                     <div class="col">
                         <label class=" item-stacked-label no-left-padding">
                             <span class="input-label">Length:</span>
-                            <input type="text">
+                            <input type="number" ng-model="config.length.value" ng-change="save()">
                         </label>
                     </div>
                     <div class="col col-75">
-
-                        <input type="range" class="range" min="2" max="26" >
-
+                        <input type="range" class="range" min="2" max="26" ng-model="config.length.value" ng-change="save()">
                     </div>
 
                 </div>
@@ -23,7 +21,7 @@
                     <div class="input-label">
                         Strength:
                     </div>
-                    <select ng-model="config.strength">
+                    <select ng-model="config.strength.value" ng-change="save()">
                         <option value="2">Alphanumeric+Special</option>
                         <option value="1">Alphanumeric</option>
                         <option value="0">Numeric</option>
@@ -34,11 +32,11 @@
                     <div class="col col-75">
                         <label class=" item-stacked-label no-left-padding">
                             <span class="input-label">Seed:</span>
-                            <input type="text" ng-model="config.seed" ng-change="saveAndHash()">
+                            <input type="text" ng-model="config.seed" ng-change="save()">
                         </label>
                     </div>
                     <div class="col">
-                        <button class="button icon ion-key button-seed" ng-click="newSeed()"></button>
+                        <button class="button icon ion-key button-seed" ng-click="save()"></button>
                     </div>
                 </div>
             </div>

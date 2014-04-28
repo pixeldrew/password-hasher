@@ -1,13 +1,13 @@
 <ion-view class="slide-in-right">
     <div ng-controller="HomeCtrl">
-        <ion-header-bar class="bar-positive" title="PHasher+"></ion-header-bar>
-        <ion-content class="has-header has-footer padding">
+        <ion-header-bar class="bar-positive"><h1 class="title">PHasher+</h1></ion-header-bar>
+        <ion-content class="has-header padding">
             <div class="list">
                 <div class="item item-input static">
                     <div class="col col-75 no-left-padding">
                         <label class="item-stacked-label">
                             <span class="input-label">Site Tag:</span>
-                            <site-list class="site-list" ng-change="hashPassword()" sites="sites"
+                            <site-list class="site-list" ng-change="getConfig()" sites="sites"
                                        ng-model="config.tag"></site-list>
                         </label>
                     </div>
@@ -26,13 +26,11 @@
                         <div class="col">
                             <label class=" item-stacked-label no-left-padding">
                                 <span class="input-label">Length:</span>
-                                <input type="text" ng-model="config.length" ng-change="saveAndHash()">
+                                <input type="number" min="2" max="26" ng-model="config.length.value" ng-change="saveAndHash()">
                             </label>
                         </div>
                         <div class="col col-75">
-
-                            <input type="range" class="range" min="2" max="26" ng-model="config.length" ng-change="saveAndHash()">
-
+                            <input type="range" class="range" min="2" max="26" ng-model="config.length.value" ng-change="saveAndHash()">
                         </div>
 
                     </div>
@@ -42,7 +40,7 @@
                         <div class="input-label">
                             Strength:
                         </div>
-                        <select ng-model="config.strength">
+                        <select ng-model="config.strength.value" ng-change="saveAndHash()">
                             <option value="2">Alphanumeric+Special</option>
                             <option value="1">Alphanumeric</option>
                             <option value="0">Numeric</option>
