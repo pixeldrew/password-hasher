@@ -5,6 +5,7 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var requireConfig = require('./build.json');
 var packageInfo = require('./package.json');
+var inliner = require("dr-webfont-inliner");
 var rjs = require('gulp-requirejs');
 
 var paths = {
@@ -23,8 +24,8 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
-gulp.task('build', function() {
-    rjs(requireConfig).pipe(gulp.dest('./'));
+gulp.task('build', function(done) {
+    rjs(requireConfig).pipe(gulp.dest('./')).on('end', done);
 });
 
 gulp.task('watch', function() {

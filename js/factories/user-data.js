@@ -46,7 +46,7 @@ define(['phasher', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(phas
         getDefaults: function() {
 
             var d = $.Deferred();
-            connection.get('options', function(config) {
+            connection.get('options', _.bind(function(config) {
 
                 config = $.extend({}, defaultConfig, config);
 
@@ -56,8 +56,10 @@ define(['phasher', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(phas
                 options.strength = config.defaultStrength;
                 options.seed = config.privateSeed;
 
+                this.saveConfig(options);
+
                 d.resolve(options);
-            });
+            }, this));
 
             return d.promise();
         },

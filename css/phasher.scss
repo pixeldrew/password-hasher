@@ -1,3 +1,11 @@
+$modules: () !default;
+@mixin exports($name) {
+  @if (index($modules, $name) == false) {
+    $modules: append($modules, $name);
+    @content;
+  }
+}
+
 /*
 To customize the look and feel of Ionic, you can override the variables
 in ionic's _variables.scss file.
@@ -14,14 +22,12 @@ $assertive:                       #ef4e3a !default;
 $royal:                           #8a6de9 !default;
 $dark:                            #444 !default;
 
-
-// The path for our ionicons font files, relative to the built CSS in www/css
-$ionicons-font-path: "../bower_components/ionic/release/fonts" !default;
+$ionicons-font-path: "../res/fonts" !default;
 
 // Include all of Ionic
 @import "../bower_components/ionic/scss/ionic";
 
-@import "../bower_components/ionic-contrib-frosted-glass/ionic.contrib.frostedGlass.css";
+@import "../bower_components/ionic-contrib-frosted-glass/ionic.contrib.frostedGlass";
 
 
 .static {

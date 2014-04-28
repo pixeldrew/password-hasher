@@ -24,6 +24,12 @@ define(['phasher', 'jquery', 'util/integer', 'factories/user-data'], function(ph
             userData.saveConfig(config);
         };
 
+        $scope.newSeed = function() {
+            $scope.config.seed = String.UUID();
+            $scope.save();
+        };
+
+
     }]);
 
 })

@@ -29,7 +29,7 @@
         "lodash": "~2.4.1",
         "lawnchair": "f9d28360a923aa3c2d1e7a313721b34ebfd60d33",
         "ionic": "v1.0.0-beta.1",
-        "ionic-contrib-frosted-glass": "ee2df7164addcdfff4cc2483e1a2b708301271ee",
+        "ionic-contrib-frosted-glass": "https://github.com/pixeldrew/ionic-contrib-frosted-glass.git#22797c867b102d111764b4091f1bc4859ee6baeb",
         "jquery": "1.11.0",
         "almond": "~0.2.9"
     }

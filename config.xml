@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="net.pixelburn.passwordhasher" version="1.0.3" xmlns="http://www.w3.org/ns/widgets"
-        xmlns:gap="http://phonegap.com/ns/1.0" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+        xmlns:gap="http://phonegap.com/ns/1.0">
     <name>PHasher+</name>
     <description>
         A simple password hasher. Based on the original Chrome extention Password Hasher plus.
@@ -15,20 +15,12 @@
     <icon src="res/icon/android/icon-72-hdpi.png" gap:platform="android" gap:density="hdpi"/>
 
     <gap:platforms>
-        <gap:platform name="android" minVersion="4.4"/>
+        <gap:platform name="android" minVersion="4.0"/>
     </gap:platforms>
 
     <gap:plugin name="nl.x-services.plugins.toast" version="1.0"/>
     <gap:plugin name="com.verso.cordova.clipboard" version="0.1.0"/>
     <gap:plugin name="net.tunts.webintent" version="0.2.1" />
-
-    <feature name="Toast">
-        <param name="ios-package" value="Toast" />
-    </feature>
-
-    <feature name="Toast">
-        <param name="android-package" value="nl.xservices.plugins.Toast" />
-    </feature>
 
     <access origin="http://localhost/*"/>
 
