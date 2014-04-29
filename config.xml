@@ -11,8 +11,8 @@
 
     <content src="index.html"/>
 
-    <icon src="res/icon/android/icon.png" gap:role="default"/>
-    <icon src="res/icon/android/icon-72-hdpi.png" gap:platform="android" gap:density="hdpi"/>
+    <icon src="res/icons/icon.png" gap:role="default"/>
+    <icon src="res/icons/icon-72-hdpi.png" gap:platform="android" gap:density="hdpi"/>
 
     <gap:platforms>
         <gap:platform name="android" minVersion="4.0"/>
