@@ -1,8 +1,9 @@
 {
   "name": "phasher",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "Drew Foehn <drew@pixelburn.net>",
-  "description": "A simple password hasher, with HTML5 storage. Based on the original Chrome extention Password Hasher plus. Built with the ionic framework",
+  "description": "A password hasher, with HTML5 storage. Based on the original Chrome extention Password Hasher plus. \nBuilt with the Ionic framework, Angular, Lawnchair, Require.js, JQuery and lodash",
+  "copyright": "Copyright Drew Foehn (2014). All rights reserved. Portions based upon Password Hasher by Steve Cooper (2006).\nOther portions Copyright, Paul Johnston, Greg Holt, Andrew Kepert, Ydnar, Lostinet (2000-2001) and distributed under the BSD License See http://pajhome.org.uk/crypt/md5 for more details. Ionic is licensed under the MIT Open Source license.",
   "repository": {
     "type": "git",
     "url": "https://github.com/pixeldrew/password-hasher.git"
@@ -12,11 +13,17 @@
   "devDependencies": {
     "gulp": "^3.5.6",
     "gulp-bump": "^0.1.8",
+    "gulp-clean": "^0.2.4",
     "gulp-concat": "^2.2.0",
+    "gulp-insert": "^0.3.0",
     "gulp-minify-css": "^0.3.0",
     "gulp-rename": "^1.2.0",
-    "gulp-requirejs": "^0.1.3",
-    "gulp-sass": "^0.7.1"
+    "gulp-replace": "^0.2.0",
+    "gulp-requirejs": "git://github.com/RobinThrift/gulp-requirejs.git#6fb08d427dda7463a07b25be3fc931f58e660b54",
+    "gulp-sass": "^0.7.1",
+    "gulp-uglify": "^0.2.1",
+    "run-sequence": "^0.3.6",
+    "semver": "^2.2.1"
   },
   "bugs": {
     "url": "https://github.com/pixeldrew/password-hasher/issues"
