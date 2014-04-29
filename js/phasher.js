@@ -29,11 +29,16 @@ define(['angular', 'ionic-angular', 'ionic-frostedglass', 'util/string'], functi
 
         }])
         .run(['$ionicPlatform', '$state', function($ionicPlatform, $state) {
-            $ionicPlatform.ready(function() {
-                // device is ready
-            });
+            if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
 
-            $state.go('tab-home');
+                $ionicPlatform.ready(function() {
+                    // device is ready
+                    $state.go('tab-home');
+                });
+
+            } else {
+                $state.go('tab-home');
+            }
 
         }]);
 
