@@ -23,10 +23,7 @@ gulp.task('sass', function() {
     gulp.src('./css/phasher.scss')
         .pipe(sass())
         .pipe(gulp.dest('./css/'))
-        .pipe(minifyCss({
-            keepSpecialComments: false
-        }))
-        .pipe(rename({ extname: '.min.css' }))
+        .pipe(minifyCss())
         .pipe(gulp.dest('./css/'));
 });
 
