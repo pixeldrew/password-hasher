@@ -1,5 +1,9 @@
 {
     "baseUrl": "js/",
+    "name": "../bower_components/almond/almond",
+    "include": ["boot"],
+    "wrapShim": true,
+    "out": "js/main.min.js",
     "paths": {
         "ionic": "../bower_components/ionic/release/js/ionic",
         "ionic-angular": "../bower_components/ionic/release/js/ionic-angular",
@@ -52,7 +56,7 @@
             "deps": ["angular-animate", "angular-sanitize", "angular-ui-router", "ionic"],
             "exports": "angular"
         },
-        "lawnchair" : {
+        "lawnchair": {
             "exports": "Lawnchair"
         },
         "lawnchair-webkit-sqlite": {
@@ -61,10 +65,5 @@
         },
         "ui-bootstrap": ["angular"],
         "ui-bootstrap-tpls": ["angular", "ui-bootstrap"]
-    },
-    "name": "../bower_components/almond/almond",
-    "include": ["boot"],
-    "wrapShim" : true,
-    "optimize": "uglify2",
-    "out": "js/main.min.js"
+    }
 }
