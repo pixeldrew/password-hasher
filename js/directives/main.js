@@ -1,1 +1,1 @@
-define(['sitelist'], function() {});
+define(['./site-list', './i18n'], function() {});

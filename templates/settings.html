@@ -1,13 +1,13 @@
-<ion-view class="slide-in-right">
-    <div ng-controller="SettingsCtrl">
-        <ion-header-bar type="bar-frosted" frosted-bar><h1 class="title">PHasher+ Defaults</h1></ion-header-bar>
+<ion-view class="slide-in-right ">
+    <div ng-controller="SettingsCtrl" >
+        <ion-header-bar type="bar-frosted" frosted-bar><h1 class="title" data-i18n="settings.title"></h1></ion-header-bar>
         <ion-content class="has-header padding">
             <div class="list">
 
                 <div class="item item-input static">
                     <div class="col">
                         <label class=" item-stacked-label no-left-padding">
-                            <span class="input-label">Length:</span>
+                            <span class="input-label" data-i18n="settings.length"></span>
                             <input type="number" ng-model="config.length.value" ng-change="save()">
                         </label>
                     </div>
@@ -18,20 +18,18 @@
                 </div>
 
                 <div class="item item-input item-select">
-                    <div class="input-label">
-                        Strength:
-                    </div>
+                    <div class="input-label" data-i18n="settings.strength"></div>
                     <select ng-model="config.strength.value" ng-change="save()">
-                        <option value="2">Alphanumeric+Special</option>
-                        <option value="1">Alphanumeric</option>
-                        <option value="0">Numeric</option>
+                        <option value="2" data-i18n="settings.alphaspecial"></option>
+                        <option value="1" data-i18n="settings.alpha"></option>
+                        <option value="0" data-i18n="settings.numeric"></option>
                     </select>
                 </div>
 
                 <div class="item item-input static">
                     <div class="col col-75">
                         <label class=" item-stacked-label no-left-padding">
-                            <span class="input-label">Seed:</span>
+                            <span class="input-label" data-i18n="settings.seed"></span>
                             <input type="text" ng-model="config.seed" ng-change="save()">
                         </label>
                     </div>
@@ -41,13 +39,11 @@
                 </div>
             </div>
 
-            <button class="button ">
-                Export
-            </button>
+            <!--button class="button " data-i18n="settings.export"></button>
 
-            <button class="button ">
-                About
-            </button>
+            <button class="button " data-i18n="settings.import"></button-->
+
+            <button class="button " ng-click="showAbout()" data-i18n="settings.about"></button>
 
         </ion-content>
 
