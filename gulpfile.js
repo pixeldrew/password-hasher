@@ -1,19 +1,21 @@
 var packageInfo = require('./package.json'),
     version = packageInfo.version,
+    //dependo = require('dependo'),
+    semver = require('semver'),
     gulp = require('gulp'),
     concat = require('gulp-concat'),
     sass = require('gulp-sass'),
     minifyCss = require('gulp-minify-css'),
-    rename = require('gulp-rename'),
     requireConfig = require('./build.json'),
     rjs = require('gulp-requirejs'),
     bump = require('gulp-bump'),
-    semver = require('semver'),
     replace = require('gulp-replace'),
     insert = require('gulp-insert'),
     sequence = require('run-sequence'),
     uglify = require('gulp-uglify'),
     clean = require('gulp-clean'),
+    codeVersion = 'var appVersion="' + version + '";',
+    codeCopyRight = "/**\n" + packageInfo.copyright + "\n\n" + packageInfo.description + "\n */\n",
     paths = {
         sass: ['./css/**/*.scss']
     },
@@ -28,9 +30,13 @@ gulp.task('sass', function() {
 });
 
 gulp.task('requirejs', function() {
-    rjs(requireConfig)
+    return rjs(requireConfig)
         .pipe(gulp.dest('./'));
 });
+
+//gulp.task('dependo', function() {
+//    dependo.generateHtml()
+//})
 
 gulp.task('watch', function() {
     gulp.watch(paths.sass, ['sass']);
@@ -75,18 +81,20 @@ gulp.task('bump-minor', ['bump-json-minor', 'bump-xml-minor']);
 gulp.task('bump-major', ['bump-json-major', 'bump-xml-major']);
 
 gulp.task('build-clean', function() {
-    gulp.src('js/main.min.js', {read: false})
+    return gulp.src('js/main.min.js', {read: false})
         .pipe(clean());
 });
 
 gulp.task('compress', function() {
     gulp.src('./js/main.min.js')
         .pipe(uglify())
-        .pipe(insert.prepend('var appVersion="' + version + '";'))
-        .pipe(insert.prepend("/**\n" + packageInfo.copyright + "\n\n" + packageInfo.description + "\n */\n"))
+        .pipe(insert.prepend(codeVersion))
+        .pipe(insert.prepend(codeCopyRight))
         .pipe(gulp.dest('./js/'));
 });
 
-gulp.task('build',['requirejs','compress','sass']);
+gulp.task('build', function(done) {
+    sequence('build-clean','requirejs', 'compress', done);
+});
 
-gulp.task('default', ['build']);
+gulp.task('default', ['build', 'sass']);

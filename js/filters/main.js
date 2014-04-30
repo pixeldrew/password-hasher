@@ -1,0 +1,1 @@
+define(['./i18n'], function(){})

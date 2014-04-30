@@ -1,12 +1,12 @@
-<ion-view class="slide-in-right">
-    <div ng-controller="HomeCtrl">
-        <ion-header-bar type="bar-frosted" frosted-bar><h1 class="title">PHasher+</h1></ion-header-bar>
+<ion-view class="slide-in-left ">
+    <div ng-controller="HomeCtrl" >
+        <ion-header-bar type="bar-frosted" frosted-bar><h1 class="title" i18n="home.title"></h1></ion-header-bar>
         <ion-content class="has-header padding">
             <div class="list">
                 <div class="item item-input static">
                     <div class="col col-75 no-left-padding">
                         <label class="item-stacked-label">
-                            <span class="input-label">Site Tag:</span>
+                            <span class="input-label" i18n="home.sitetag"></span>
                             <site-list class="site-list" ng-change="getConfig()" sites="sites"
                                        ng-model="config.tag"></site-list>
                         </label>
@@ -17,7 +17,7 @@
                 </div>
 
                 <ion-toggle class="advanced-toggle" ng-model="config.showAdvanced">
-                    <span class="input-label">Options</span>
+                    <span class="input-label" i18n="home.options"></span>
                 </ion-toggle>
 
                 <div ng-show="config.showAdvanced">
@@ -25,25 +25,23 @@
                     <div class="item item-input static">
                         <div class="col">
                             <label class=" item-stacked-label no-left-padding">
-                                <span class="input-label">Length:</span>
+                                <span class="input-label" i18n="home.length"></span>
                                 <input type="number" min="2" max="26" ng-model="config.length.value" ng-change="saveAndHash()">
                             </label>
                         </div>
                         <div class="col col-75">
                             <input type="range" class="range" min="2" max="26" ng-model="config.length.value" ng-change="saveAndHash()">
                         </div>
-
                     </div>
 
-
                     <div class="item item-input item-select">
-                        <div class="input-label">
-                            Strength:
+                        <div class="input-label" i18n="home.strength">
+
                         </div>
                         <select ng-model="config.strength.value" ng-change="saveAndHash()">
-                            <option value="2">Alphanumeric+Special</option>
-                            <option value="1">Alphanumeric</option>
-                            <option value="0">Numeric</option>
+                            <option value="2" i18n="home.alphaspecial"></option>
+                            <option value="1" i18n="home.alpha"></option>
+                            <option value="0" i18n="home.numeric"></option>
                         </select>
                     </div>
 
@@ -51,7 +49,7 @@
                     <div class="item item-input static">
                         <div class="col col-75">
                             <label class=" item-stacked-label no-left-padding">
-                                <span class="input-label">Seed:</span>
+                                <span class="input-label" i18n="home.seed"></span>
                                 <input type="text" ng-model="config.seed" ng-change="saveAndHash()">
                             </label>
                         </div>
@@ -62,14 +60,14 @@
                 </div>
 
                 <label class="item item-input item-stacked-label">
-                    <span class="input-label">Password:</span>
+                    <span class="input-label" i18n="home.password"></span>
                     <input type="password" ng-model="config.password" ng-change="saveAndHash()">
                 </label>
 
                 <div class="item item-input static">
                     <div class="col col-75 no-left-padding">
                         <label class="item-stacked-label">
-                            <span class="input-label">Hashed:</span>
+                            <span class="input-label" i18n="home.hashed"></span>
                             <input class="hashed-output" type="text" disabled placeholder="" ng-model="hashedPassword">
                         </label>
                     </div>

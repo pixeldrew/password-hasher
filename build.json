@@ -5,6 +5,8 @@
     "wrapShim": true,
     "out": "js/main.min.js",
     "paths": {
+        "appinfo" : "../package.json",
+        "json": "../bower_components/requirejs-plugins/src/json",
         "ionic": "../bower_components/ionic/release/js/ionic",
         "ionic-angular": "../bower_components/ionic/release/js/ionic-angular",
         "ionic-frostedglass": "../bower_components/ionic-contrib-frosted-glass/ionic.contrib.frostedGlass",
@@ -16,11 +18,15 @@
         "lawnchair": "../bower_components/lawnchair/src/Lawnchair",
         "lawnchair-webkit-sqlite": "../bower_components/lawnchair/src/adapters/webkit-sqlite",
         "lodash": "../bower_components/lodash/dist/lodash",
+        "root": "../",
+        "text": "../bower_components/requirejs-text/text",
+        "i18n": "../bower_components/requirejs-i18n/i18n",
+        "nls" : "../nls",
         "lib": "../lib",
         "ui-bootstrap": "../lib/ui-bootstrap-custom",
         "ui-bootstrap-tpls": "../lib/ui-bootstrap-custom-tpls"
     },
-    "packages": ["controllers", "directives", "factories"],
+    "packages": ["controllers", "directives", "factories", "filters", "services"],
     "shim": {
         "ionic": {
             "exports": "ionic"
