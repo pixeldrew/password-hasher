@@ -1,0 +1,1 @@
+define(['./localization'], function() {});

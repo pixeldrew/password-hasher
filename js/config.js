@@ -1,6 +1,9 @@
 require.config({
     'baseUrl': 'js',
+    'waitSeconds': 0,
     'paths': {
+        'appinfo': '../package.json',
+        'json': '../bower_components/requirejs-plugins/src/json',
         'ionic': '../bower_components/ionic/release/js/ionic',
         'ionic-angular': '../bower_components/ionic/release/js/ionic-angular',
         'ionic-frostedglass': '../bower_components/ionic-contrib-frosted-glass/ionic.contrib.frostedGlass',
@@ -9,9 +12,13 @@ require.config({
         'angular-sanitize': '../bower_components/angular-sanitize/angular-sanitize',
         'angular-ui-router': '../bower_components/angular-ui-router/release/angular-ui-router',
         'jquery': '../bower_components/jquery/dist/jquery',
-        lawnchair: '../bower_components/lawnchair/src/Lawnchair',
+        'lawnchair': '../bower_components/lawnchair/src/Lawnchair',
         'lawnchair-webkit-sqlite': '../bower_components/lawnchair/src/adapters/webkit-sqlite',
-        lodash: '../bower_components/lodash/dist/lodash',
+        'lodash': '../bower_components/lodash/dist/lodash',
+        'root': '../',
+        'text': '../bower_components/requirejs-text/text',
+        'i18n': '../bower_components/requirejs-i18n/i18n',
+        'nls': '../nls',
         'lib': '../lib',
         'ui-bootstrap': '../lib/ui-bootstrap-custom',
         'ui-bootstrap-tpls': '../lib/ui-bootstrap-custom-tpls'
@@ -19,7 +26,9 @@ require.config({
     packages: [
         'controllers',
         'directives',
-        'factories'
+        'factories',
+        'services',
+        'filters'
     ],
     shim: {
         'ionic': {'exports': 'ionic'},

@@ -1,8 +1,17 @@
-define(['phasher', 'jquery', 'util/integer', 'factories/user-data'], function(phasher, $, Integer) {
+define(['phasher', 'jquery', 'util/integer', 'json!appinfo', 'factories/user-data'], function(phasher, $, Integer, appInfo) {
 
-    phasher.controller('SettingsCtrl', ['$scope', 'UserData', function($scope, userData) {
+    phasher.controller('SettingsCtrl', ['$scope', 'UserData', '$ionicModal', function($scope, userData, $ionicModal) {
 
         $scope.config = {};
+
+        $scope.version = appInfo.version;
+
+        $ionicModal.fromTemplateUrl('templates/about.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            $scope.modal = modal;
+        });
 
         userData.getDefaults().then(function(config) {
             if(config) {
@@ -28,6 +37,19 @@ define(['phasher', 'jquery', 'util/integer', 'factories/user-data'], function(ph
             $scope.config.seed = String.UUID();
             $scope.save();
         };
+
+        $scope.showAbout = function() {
+            $scope.modal.show();
+        };
+
+        $scope.closeAbout = function() {
+            $scope.modal.hide();
+        };
+
+        //Cleanup the modal when we're done with it!
+        $scope.$on('$destroy', function() {
+            $scope.modal.remove();
+        });
 
 
     }]);
