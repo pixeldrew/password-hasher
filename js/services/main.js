@@ -1,1 +1,1 @@
-define(['./localization'], function() {});
+define(['./localization', './password-hasher', './user-data'], function() {});

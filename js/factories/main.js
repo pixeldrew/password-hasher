@@ -1,3 +1,0 @@
-define(['password-hasher'], function() {
-
-})

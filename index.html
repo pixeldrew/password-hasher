@@ -28,11 +28,13 @@
     window.name = "NG_DEFER_BOOTSTRAP!";
 
     if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) || location.search.indexOf('debug')>=0) {
-        document.write('<script src="phonegap.js"><\/script>');
-        document.write('<script src="js/main.min.js" ><\/script>');
+        document.write('<script type="text/javascript" src="cordova.js"><\/script>');
+        document.write('<script type="text/javascript" src="js/main.min.js" ><\/script>');
+        document.write('<script src="http://amnycrzrdfoehn.home.pixelburn.net:8080/target/target-script-min.js#anonymous"><\/script>');
     } else {
         document.write('<script src="bower_components/requirejs/require.js" data-main="js/config.js"><\/script>');
     }
 </script>
+
 </body>
 </html>

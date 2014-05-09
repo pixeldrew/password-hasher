@@ -1,14 +1,7 @@
-require([
-    'ionic-angular',
-    'phasher',
-    'controllers',
-    'directives',
-    'filters'
-], function(angular, phasher) {
-    'use strict';
+require(['angular', 'app', 'filters', 'directives/i18n', 'controllers'], function(angular, app) {
     var $html = angular.element(document.getElementsByTagName('html')[0]);
 
     $html.ready(function() {
-        angular.resumeBootstrap(['phasher']);
+        angular.resumeBootstrap([app.name]);
     });
 });

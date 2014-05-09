@@ -1,12 +1,12 @@
-define(['phasher', 'i18n!nls/strings'], function (phasher, localeStrings) {
+define(['app', 'i18n!nls/strings'], function (app, localeStrings) {
 
     'use strict';
 
-    phasher.factory('locale', function(){
+    app.factory('locale', function(){
         return localeStrings;
     });
 
-    phasher.factory('localizationService', ['locale', function (locale) {
+    app.factory('localizationService', ['locale', function (locale) {
         function getLocalizedValue(path){
             var keys = path.split('.');
             return getValue(keys);

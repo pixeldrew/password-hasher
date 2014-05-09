@@ -1,10 +1,9 @@
-/*global Lawnchair*/
-define(['phasher', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(phasher, _, $, Lawnchair) {
+define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, $, Lawnchair) {
 
     var UserData = function() {
 
-    }, connection = Lawnchair({name: 'phasher',
-        display: "Phasher User Data",
+    }, connection = Lawnchair({name: 'app',
+        display: "app User Data",
         version: "1.0"
     }), defaultConfig = {
         privateSeed: String.UUID(),
@@ -99,7 +98,7 @@ define(['phasher', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(phas
 
     };
 
-    phasher.factory('UserData', function() {
+    app.factory('UserData', function() {
 
         return new UserData();
 

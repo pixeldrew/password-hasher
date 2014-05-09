@@ -1,9 +1,9 @@
-define(['phasher', 'services/localization'], function(phasher) {
+define(['app', 'services/localization'], function(app) {
 
-    phasher.filter('i18n', ['localizationService', function(localizationService){
+    app.filter('i18n', ['localizationService', function(localizationService){
         return function(input){
             return localizationService.getLocalizedString(input);
         }
     }]);
 
-})
+});

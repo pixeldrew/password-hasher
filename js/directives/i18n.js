@@ -1,6 +1,6 @@
-define(['phasher', 'services/localization'], function(phasher) {
+define(['app', 'services/localization'], function(app) {
 
-    phasher.directive('i18n', ['localizationService', function(localizationService){
+    app.directive('i18n', ['localizationService', function(localizationService){
         return {
             restrict:'A',
             link:function (scope, elm, attrs) {
