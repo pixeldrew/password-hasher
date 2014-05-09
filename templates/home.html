@@ -1,7 +1,6 @@
-<ion-view class="slide-in-left ">
+<ion-view class="slide-in-left " title="{{'home.title' | i18n }}">
     <div ng-controller="HomeCtrl" >
-        <ion-header-bar type="bar-frosted" frosted-bar><h1 class="title" i18n="home.title"></h1></ion-header-bar>
-        <ion-content class="has-header padding">
+        <ion-content class="padding">
             <div class="list">
                 <div class="item item-input static">
                     <div class="col col-75 no-left-padding">
@@ -12,15 +11,15 @@
                         </label>
                     </div>
                     <div class="col">
-                        <button class="button icon ion-chevron-up button-bump" ng-click="bump()"></button>
+                        <button class="button icon ion-chevron-up button-bump button-dark" ng-click="bump()"></button>
                     </div>
                 </div>
 
-                <ion-toggle class="advanced-toggle" ng-model="config.showAdvanced">
+                <ion-toggle toggle-class="toggle-dark" ng-model="config.showAdvanced">
                     <span class="input-label" i18n="home.options"></span>
                 </ion-toggle>
 
-                <div ng-show="config.showAdvanced">
+                <div ng-show="config.showAdvanced" ng-animate="fadeIn">
 
                     <div class="item item-input static">
                         <div class="col">
@@ -54,7 +53,7 @@
                             </label>
                         </div>
                         <div class="col">
-                            <button class="button icon ion-key button-seed" ng-click="newSeed()"></button>
+                            <button class="button icon ion-key button-seed button-dark button-bump" ng-click="newSeed()"></button>
                         </div>
                     </div>
                 </div>
@@ -72,7 +71,7 @@
                         </label>
                     </div>
                     <div class="col">
-                        <button class="button icon ion-ios7-copy button-bump" ng-click="copySaveAndHash()"></button>
+                        <button class="button icon ion-ios7-copy button-dark button-bump" ng-click="copySaveAndHash()"></button>
                     </div>
                 </div>
 
