@@ -1,4 +1,4 @@
-define(['phasher', 'lib/sha1'], function(phasher) {
+define(['app', 'lib/sha1'], function(app) {
 
     var PasswordHasher = function() {
 
@@ -126,7 +126,7 @@ define(['phasher', 'lib/sha1'], function(phasher) {
 
     };
 
-    phasher.factory('PasswordHasher', function() {
+    app.factory('PasswordHasher', function() {
 
         return new PasswordHasher();
     });

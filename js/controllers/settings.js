@@ -1,6 +1,6 @@
-define(['phasher', 'jquery', 'util/integer', 'json!appinfo', 'factories/user-data'], function(phasher, $, Integer, appInfo) {
+define(['app', 'jquery', 'util/integer', 'json!appinfo', 'services/user-data'], function(app, $, Integer, appInfo) {
 
-    phasher.controller('SettingsCtrl', ['$scope', 'UserData', '$ionicModal', function($scope, userData, $ionicModal) {
+    app.controller('SettingsCtrl', ['$scope', 'UserData', '$ionicModal', function($scope, userData, $ionicModal) {
 
         $scope.config = {};
 

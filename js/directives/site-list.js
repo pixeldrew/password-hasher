@@ -1,4 +1,4 @@
-define(['phasher', 'jquery', 'lodash', 'ui-bootstrap', 'ui-bootstrap-tpls'], function(phasher, $, _) {
+define(['app', 'jquery', 'lodash', 'ui-bootstrap', 'ui-bootstrap-tpls'], function(app, $, _) {
 
     var substringMatcher = function(strs) {
         return function findMatches(q, cb) {
@@ -18,7 +18,7 @@ define(['phasher', 'jquery', 'lodash', 'ui-bootstrap', 'ui-bootstrap-tpls'], fun
         };
     };
 
-    phasher.directive('siteList', function() {
+    app.directive('siteList', function() {
 
         return {
             'restrict': 'E',

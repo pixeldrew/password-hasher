@@ -1,6 +1,5 @@
 require.config({
     'baseUrl': 'js',
-    'waitSeconds': 0,
     'paths': {
         'appinfo': '../package.json',
         'json': '../bower_components/requirejs-plugins/src/json',
@@ -18,7 +17,7 @@ require.config({
         'root': '../',
         'text': '../bower_components/requirejs-text/text',
         'i18n': '../bower_components/requirejs-i18n/i18n',
-        'nls': '../nls',
+        'nls': '../res/nls',
         'lib': '../lib',
         'ui-bootstrap': '../lib/ui-bootstrap-custom',
         'ui-bootstrap-tpls': '../lib/ui-bootstrap-custom-tpls'
@@ -26,7 +25,6 @@ require.config({
     packages: [
         'controllers',
         'directives',
-        'factories',
         'services',
         'filters'
     ],
@@ -48,4 +46,8 @@ require.config({
     }
 });
 
-require(['boot']);
+define('cordova', [], function() {
+    return window.cordova || { require: function() {return {}}};
+});
+
+require(['filters', 'directives/i18n', 'controllers']);

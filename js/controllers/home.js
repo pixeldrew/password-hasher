@@ -1,4 +1,4 @@
-define(['phasher', 'util/integer', 'directives/site-list', 'factories/password-hasher', 'factories/user-data'], function(phasher, Integer) {
+define(['app', 'cordova', 'util/integer', 'directives/site-list', 'services/password-hasher', 'services/user-data'], function(app, cordova, Integer) {
 
     function bumpTag(tag) {
         var bump = 1, re = new RegExp("^([^:]+?)(:([0-9]+))?$"), matcher;
@@ -11,10 +11,11 @@ define(['phasher', 'util/integer', 'directives/site-list', 'factories/password-h
         }
 
         return tag + ':' + bump;
-
     }
 
-    phasher.controller('HomeCtrl', ['$scope', 'PasswordHasher', 'UserData', function($scope, passwordHasher, userData) {
+    var clipboard = cordova.require('com.verso.cordova.clipboard.Clipboard');
+
+    app.controller('HomeCtrl', ['$scope', 'PasswordHasher', 'UserData', function($scope, passwordHasher, userData) {
 
         $scope.password = '';
         $scope.config = {};
@@ -90,9 +91,9 @@ define(['phasher', 'util/integer', 'directives/site-list', 'factories/password-h
         };
 
         $scope.copy = function() {
-            window.plugins.clipboard.copy($scope.hashedPassword,
+            clipboard.copy($scope.hashedPassword,
                 function() {
-                    window.plugins.toast.showShortTop('Copied Hashed Password');
+                    window.plugins.toast.showShortCenter('Copied Hashed Password');
                 });
         };
 
