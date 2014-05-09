@@ -1,4 +1,4 @@
-define(['app', 'cordova', 'util/integer', 'directives/site-list', 'services/password-hasher', 'services/user-data'], function(app, cordova, Integer) {
+define(['app', 'util/integer', 'directives/site-list', 'services/password-hasher', 'services/user-data'], function(app, Integer) {
 
     function bumpTag(tag) {
         var bump = 1, re = new RegExp("^([^:]+?)(:([0-9]+))?$"), matcher;
@@ -12,8 +12,6 @@ define(['app', 'cordova', 'util/integer', 'directives/site-list', 'services/pass
 
         return tag + ':' + bump;
     }
-
-    var clipboard = cordova.require('com.verso.cordova.clipboard.Clipboard');
 
     app.controller('HomeCtrl', ['$scope', 'PasswordHasher', 'UserData', function($scope, passwordHasher, userData) {
 
@@ -91,9 +89,12 @@ define(['app', 'cordova', 'util/integer', 'directives/site-list', 'services/pass
         };
 
         $scope.copy = function() {
+            var clipboard = window.cordova.plugins.clipboard || window.plugins.clipboard,
+                toast = window.plugins.toast;
+
             clipboard.copy($scope.hashedPassword,
                 function() {
-                    window.plugins.toast.showShortCenter('Copied Hashed Password');
+                    toast.showShortCenter('Copied Hashed Password');
                 });
         };
 

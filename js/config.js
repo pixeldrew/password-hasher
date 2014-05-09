@@ -47,7 +47,7 @@ require.config({
 });
 
 define('cordova', [], function() {
-    return window.cordova || { require: function() {return {}}};
+    return window.cordova || { require: function() { return {}}};
 });
 
-require(['filters', 'directives/i18n', 'controllers']);
+require(['boot']);

@@ -1,12 +1,11 @@
 {
     "baseUrl": "js/",
     "name": "../bower_components/almond/almond",
-    "include": ["filters", "directives/i18n", "controllers"],
-    "insertRequire": ["filters", "directives/i18n", "controllers"],
+    "include": ["boot"],
     "wrapShim": true,
     "out": "js/main.min.js",
     "paths": {
-        "appinfo" : "../package.json",
+        "appinfo": "../package.json",
         "json": "../bower_components/requirejs-plugins/src/json",
         "ionic": "../bower_components/ionic/release/js/ionic",
         "ionic-angular": "../bower_components/ionic/release/js/ionic-angular",
@@ -22,11 +21,10 @@
         "root": "../",
         "text": "../bower_components/requirejs-text/text",
         "i18n": "../bower_components/requirejs-i18n/i18n",
-        "nls" : "../res/nls",
+        "nls": "../res/nls",
         "lib": "../lib",
         "ui-bootstrap": "../lib/ui-bootstrap-custom",
-        "ui-bootstrap-tpls": "../lib/ui-bootstrap-custom-tpls",
-        "cordova": "empty:"
+        "ui-bootstrap-tpls": "../lib/ui-bootstrap-custom-tpls"
     },
     "packages": ["controllers", "directives", "filters", "services"],
     "shim": {
@@ -70,6 +68,9 @@
         "lawnchair-webkit-sqlite": {
             "deps": ["lawnchair"],
             "exports": "Lawnchair"
+        },
+        "cordova": {
+            "exports": "cordova"
         },
         "ui-bootstrap": ["angular"],
         "ui-bootstrap-tpls": ["angular", "ui-bootstrap"]

@@ -50,12 +50,6 @@ define(['angular', 'ionic-angular', 'ionic-frostedglass', 'util/string'], functi
 
         }]);
 
-    var $html = angular.element(document.getElementsByTagName('html')[0]);
-
-    $html.ready(function() {
-        angular.resumeBootstrap([app.name]);
-    });
-
     return app;
 
 });
