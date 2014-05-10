@@ -17,7 +17,7 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
 
             var obj = $.extend({}, config);
 
-            obj.key = 'tags:' + id;
+            obj.key = 'tag:' + id;
 
             connection.save(obj);
         },
@@ -25,7 +25,7 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
 
             var d = $.Deferred();
 
-            connection.get('tags:' + id, function(tag) {
+            connection.get('tag:' + id, function(tag) {
                 d.resolve(tag)
             });
 
@@ -35,9 +35,9 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
 
             var newConfig = {};
 
-            newConfig.defaultLength = config.length;
-            newConfig.defaultStrength = config.strength;
-            newConfig.privateSeed = config.seed;
+            newConfig.defaultLength = config.length || config.defaultLength;
+            newConfig.defaultStrength = config.strength || config.defaultStrength;
+            newConfig.privateSeed = config.seed || config.privateSeed;
             newConfig.key = 'options';
 
             connection.save(newConfig);
@@ -68,7 +68,7 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
 
             connection.keys(function(keys) {
 
-                var tags = [], tagRe = /^(tags\:)+/;
+                var tags = [], tagRe = /^(tag\:)+/;
 
                 _(keys).each(function(key) {
                     if(tagRe.test(key)) {
@@ -87,13 +87,70 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
             var d = $.Deferred();
 
             connection.all(function(db) {
-                _(db).each(function(val) {
-                    delete val.key;
-                });
-                d.resolve(JSON.stringify(db));
+                var dbExport = _(db).reduce(function(result, value) {
+
+                    result[value.key] = value;
+
+                    // make sure all values are strings
+                    _(value).forIn(function(v, k) {
+                        value[k] = v + "";
+                    });
+
+                    delete value.key;
+
+                    return result;
+                }, {});
+
+
+                d.resolve(JSON.stringify(dbExport));
             });
 
             return d.promise();
+        },
+        saveImport: function(importData) {
+
+            var d = $.Deferred(), tagRe = /^(tag\:)+/;
+
+            try {
+
+                var data = JSON.parse(importData);
+
+                connection.nuke();
+
+                _(data).forIn(_.bind(function(v, k) {
+
+                    if(k === 'options') {
+                        if(v.hasOwnProperty('defaultLength') && v.hasOwnProperty('defaultStrength') && v.hasOwnProperty('privateSeed')) {
+                            this.saveConfig(v);
+                        } else {
+                            throw {parseError: 'config is malformed'};
+                        }
+                    }
+
+                    if(tagRe.test(k)) {
+
+                        var x = k.replace(tagRe, '');
+
+                        if(v.hasOwnProperty('seed') &&
+                            v.hasOwnProperty('length') &&
+                            v.hasOwnProperty('strength')) {
+
+                            this.saveTag(x, v);
+
+                        } else {
+                            debugger;
+                            throw {parseError:x + ' tag is malformed'};
+                        }
+                    }
+
+                }, this));
+
+                return d.resolve();
+
+            } catch(err) {
+                return d.reject({parseError:'malformed JSON'});
+            }
+
         }
 
     };

@@ -1,11 +1,3 @@
-$modules: () !default;
-@mixin exports($name) {
-  @if (index($modules, $name) == false) {
-    $modules: append($modules, $name);
-    @content;
-  }
-}
-
 /*
 To customize the look and feel of Ionic, you can override the variables
 in ionic's _variables.scss file.
@@ -67,6 +59,10 @@ $ionicons-font-path: "../res/fonts" !default;
   text-decoration: none;
   background-color: $positive;
   outline: 0;
+}
+
+.dark .dropdown-menu .active a, .dark .dropdown-menu .active a:hover, .dark .dropdown-menu .active a:focus {
+  background-color: $dark;
 }
 
 .button-bump,.button-seed {

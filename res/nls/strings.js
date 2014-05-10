@@ -18,6 +18,17 @@ define({
             "copyright": "Copyright Drew Foehn (2014). All rights reserved. Portions based upon Password Hasher by Steve Cooper (2006).\nOther portions Copyright, Paul Johnston, Greg Holt, Andrew Kepert, Ydnar, Lostinet (2000-2001) and distributed under the BSD License See http://pajhome.org.uk/crypt/md5 for more details. Ionic is licensed under the MIT Open Source license.",
             "close": "Close"
         },
+        "export" : {
+            "title": "Export",
+            "close": "Close"
+        },
+        "import" : {
+            "title": "Import",
+            "start": "Start",
+            "ok": "Ok",
+            "cancel": "Cancel",
+            "parserError": "A parsing error occurred"
+        },
         "home" : {
             "title": "PHasher+",
             "sitetag": "Site Tag:",
