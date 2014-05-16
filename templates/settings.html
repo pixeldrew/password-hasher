@@ -1,5 +1,5 @@
 <ion-view class="slide-in-right " title="{{'settings.title' | i18n }}">
-    <div ng-controller="SettingsCtrl" >
+    <div ng-controller="Settings" >
         <ion-content class="has-header padding">
             <div class="list">
 
@@ -13,7 +13,6 @@
                     <div class="col col-75">
                         <input type="range" class="range" min="2" max="26" ng-model="config.length.value" ng-change="save()">
                     </div>
-
                 </div>
 
                 <div class="item item-input item-select">
@@ -38,9 +37,9 @@
                 </div>
             </div>
 
-            <!--button class="button " data-i18n="settings.export"></button>
+            <button class="button " data-i18n="settings.export" ng-click="showExport()"></button>
 
-            <button class="button " data-i18n="settings.import"></button-->
+            <button class="button " data-i18n="settings.import" ng-click="showImport()"></button>
 
             <button class="button " ng-click="showAbout()" data-i18n="settings.about"></button>
 

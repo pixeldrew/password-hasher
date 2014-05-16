@@ -1,0 +1,14 @@
+<div class="modal">
+    <ion-header-bar>
+        <h1 class="title">{{"export.title" | i18n }}</h1>
+    </ion-header-bar>
+    <ion-content class="padding">
+        <label class="item item-input">
+            <textarea rows="20">{{exportData}}</textarea>
+        </label>
+        <div class="item">
+            <button class="button" ng-click="closeExport()" i18n="export.close">
+            </button>
+        </div>
+    </ion-content>
+</div>

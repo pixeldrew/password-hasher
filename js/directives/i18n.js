@@ -1,6 +1,6 @@
 define(['app', 'services/localization'], function(app) {
 
-    app.directive('i18n', ['localizationService', function(localizationService){
+    app.directive('i18n', ['LocalizationService', function(localizationService){
         return {
             restrict:'A',
             link:function (scope, elm, attrs) {

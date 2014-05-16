@@ -76,9 +76,9 @@ gulp.task('bump-xml-major', function() {
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('bump-patch', ['bump-json-patch', 'bump-xml-patch']);
-gulp.task('bump-minor', ['bump-json-minor', 'bump-xml-minor']);
-gulp.task('bump-major', ['bump-json-major', 'bump-xml-major']);
+gulp.task('bump-hotfix', ['bump-json-patch', 'bump-xml-patch']);
+gulp.task('bump-release-minor', ['bump-json-minor', 'bump-xml-minor']);
+gulp.task('bump-release-major', ['bump-json-major', 'bump-xml-major']);
 
 gulp.task('build-clean', function() {
     return gulp.src('js/main.min.js', {read: false})

@@ -126,7 +126,7 @@ define(['app', 'lib/sha1'], function(app) {
 
     };
 
-    app.factory('PasswordHasher', function() {
+    app.factory('PasswordHasherService', function() {
 
         return new PasswordHasher();
     });

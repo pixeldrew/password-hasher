@@ -2,14 +2,15 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
 
     var UserData = function() {
 
-    }, connection = Lawnchair({name: 'app',
-        display: "app User Data",
-        version: "1.0"
-    }), defaultConfig = {
-        privateSeed: String.UUID(),
-        defaultStrength: 2,
-        defaultLength: 8
-    };
+        }, connection = Lawnchair({name: 'app',
+            display: "app User Data",
+            version: "1.0"
+        }), defaultConfig = {
+            privateSeed: String.UUID(),
+            defaultStrength: 2,
+            defaultLength: 8
+        },
+        lastInput;
 
     UserData.prototype = {
 
@@ -17,27 +18,38 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
 
             var obj = $.extend({}, config);
 
-            obj.key = 'tags:' + id;
+            obj.key = 'tag:' + id;
+
+            delete obj.tag;
+            delete obj.password;
+            delete obj.showAdvanced;
 
             connection.save(obj);
+
         },
         getTag: function(id) {
 
             var d = $.Deferred();
 
-            connection.get('tags:' + id, function(tag) {
+            connection.get('tag:' + id, function(tag) {
                 d.resolve(tag)
             });
 
             return d.promise();
         },
+        setLastInput: function(config) {
+            lastInput = config;
+        },
+        getLastInput: function() {
+            return lastInput;
+        },
         saveConfig: function(config) {
 
             var newConfig = {};
 
-            newConfig.defaultLength = config.length;
-            newConfig.defaultStrength = config.strength;
-            newConfig.privateSeed = config.seed;
+            newConfig.defaultLength = config.length || config.defaultLength;
+            newConfig.defaultStrength = config.strength || config.defaultStrength;
+            newConfig.privateSeed = config.seed || config.privateSeed;
             newConfig.key = 'options';
 
             connection.save(newConfig);
@@ -68,7 +80,7 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
 
             connection.keys(function(keys) {
 
-                var tags = [], tagRe = /^(tags\:)+/;
+                var tags = [], tagRe = /^(tag\:)+/;
 
                 _(keys).each(function(key) {
                     if(tagRe.test(key)) {
@@ -87,18 +99,74 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
             var d = $.Deferred();
 
             connection.all(function(db) {
-                _(db).each(function(val) {
-                    delete val.key;
-                });
-                d.resolve(JSON.stringify(db));
+                var dbExport = _(db).reduce(function(result, value) {
+
+                    result[value.key] = value;
+
+                    // make sure all values are strings
+                    _(value).forIn(function(v, k) {
+                        value[k] = v + "";
+                    });
+
+                    delete value.key;
+
+                    return result;
+                }, {});
+
+
+                d.resolve(JSON.stringify(dbExport));
             });
 
             return d.promise();
+        },
+        saveImport: function(importData) {
+
+            var d = $.Deferred(), tagRe = /^(tag\:)+/;
+
+            try {
+
+                var data = JSON.parse(importData);
+
+                _(data).forIn(_.bind(function(v, k) {
+
+                    if(k === 'options') {
+                        if(v.hasOwnProperty('defaultLength') &&
+                            v.hasOwnProperty('defaultStrength') &&
+                            v.hasOwnProperty('privateSeed')) {
+                            this.saveConfig(v);
+                        } else {
+                            throw {parseError: 'PARSE_ERROR'};
+                        }
+                    }
+
+                    if(tagRe.test(k)) {
+
+                        var x = k.replace(tagRe, '');
+
+                        if(v.hasOwnProperty('seed') &&
+                            v.hasOwnProperty('length') &&
+                            v.hasOwnProperty('strength')) {
+
+                            this.saveTag(x, v);
+
+                        } else {
+                            throw {parseError: 'PARSE_ERROR'};
+                        }
+                    }
+
+                }, this));
+
+                return d.resolve();
+
+            } catch(err) {
+                return d.reject({parseError: 'PARSE_ERROR'});
+            }
+
         }
 
     };
 
-    app.factory('UserData', function() {
+    app.factory('UserDataService', function() {
 
         return new UserData();
 

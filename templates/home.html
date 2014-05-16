@@ -1,12 +1,12 @@
 <ion-view class="slide-in-left " title="{{'home.title' | i18n }}">
-    <div ng-controller="HomeCtrl" >
+    <div ng-controller="Home" >
         <ion-content class="padding">
             <div class="list">
                 <div class="item item-input static">
                     <div class="col col-75 no-left-padding">
                         <label class="item-stacked-label">
                             <span class="input-label" i18n="home.sitetag"></span>
-                            <site-list class="site-list" ng-change="getConfig()" sites="sites"
+                            <site-list class="site-list dark" ng-change="getConfig()" sites="sites"
                                        ng-model="config.tag"></site-list>
                         </label>
                     </div>
@@ -19,7 +19,7 @@
                     <span class="input-label" i18n="home.options"></span>
                 </ion-toggle>
 
-                <div ng-show="config.showAdvanced" ng-animate="fadeIn">
+                <div ng-show="config.showAdvanced">
 
                     <div class="item item-input static">
                         <div class="col">
