@@ -1,4 +1,4 @@
-define(['app', 'util/integer', 'directives/site-list', 'services/password-hasher', 'services/user-data'], function(app, Integer) {
+define(['app', 'util/integer', 'directives/site-list', 'services/password-hasher', 'services/user-data', 'services/localization'], function(app, Integer) {
 
     function bumpTag(tag) {
         var bump = 1, re = new RegExp("^([^:]+?)(:([0-9]+))?$"), matcher;
@@ -13,7 +13,8 @@ define(['app', 'util/integer', 'directives/site-list', 'services/password-hasher
         return tag + ':' + bump;
     }
 
-    app.controller('HomeCtrl', ['$scope', 'PasswordHasher', 'UserData', function($scope, passwordHasher, userData) {
+    app.controller('Home', ['$scope', 'PasswordHasherService', 'UserDataService', 'LocalizationService',
+        function($scope, passwordHasherService, userDataService) {
 
         $scope.password = '';
         $scope.config = {};
@@ -21,13 +22,19 @@ define(['app', 'util/integer', 'directives/site-list', 'services/password-hasher
         $scope.config.password = '';
         $scope.config.showAdvanced = false;
 
-        userData.getDefaults().then(function(config) {
+        userDataService.getDefaults().then(function(config) {
             $scope.config.seed = config.seed;
             $scope.config.length = new Integer(config.length);
             $scope.config.strength = new Integer(config.strength);
+
+            if(config = userDataService.getLastInput()) {
+                $scope.config = config;
+
+                $scope.hashPassword();
+            }
         });
 
-        userData.getAllTags().then(function(tags) {
+        userDataService.getAllTags().then(function(tags) {
             $scope.sites = tags;
         });
 
@@ -38,7 +45,7 @@ define(['app', 'util/integer', 'directives/site-list', 'services/password-hasher
 
         $scope.getConfig = function() {
 
-            userData.getTag($scope.config.tag).then(function(tag) {
+            userDataService.getTag($scope.config.tag).then(function(tag) {
 
                 if(tag) {
                     $scope.config.seed = tag.seed;
@@ -76,15 +83,17 @@ define(['app', 'util/integer', 'directives/site-list', 'services/password-hasher
                 return;
             }
 
-            var salt = passwordHasher.generateHashWord($scope.config.seed, $scope.config.tag, 24, true, true, true, false, false);
+            var salt = passwordHasherService.generateHashWord($scope.config.seed, $scope.config.tag, 24, true, true, true, false, false);
 
-            $scope.hashedPassword = passwordHasher.generateHashWord(salt, $scope.config.password, $scope.config.length.value,
+            $scope.hashedPassword = passwordHasherService.generateHashWord(salt, $scope.config.password, $scope.config.length.value,
                 true, // require
                     $scope.config.strength.value > 1, // require punctuation
                 true, // require mixed case
                     $scope.config.strength.value < 2, // require special characters
                     $scope.config.strength.value == 0 // only digits
             );
+
+            userDataService.setLastInput($scope.config);
 
         };
 
@@ -94,7 +103,7 @@ define(['app', 'util/integer', 'directives/site-list', 'services/password-hasher
 
             clipboard.copy($scope.hashedPassword,
                 function() {
-                    toast.showShortCenter('Copied Hashed Password');
+                    toast.showShortCenter(localizationService.getLocalizedString('home.copied'));
                 });
         };
 
@@ -103,14 +112,10 @@ define(['app', 'util/integer', 'directives/site-list', 'services/password-hasher
 
                 var config = $.extend({}, $scope.config);
 
-                delete config.tag;
-                delete config.password;
-                delete config.showAdvanced;
-
                 config.length = config.length.value;
                 config.strength = config.strength.value;
 
-                userData.saveTag($scope.config.tag, config);
+                userDataService.saveTag($scope.config.tag, config);
             }
         }
 

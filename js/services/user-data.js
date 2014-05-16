@@ -2,14 +2,15 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
 
     var UserData = function() {
 
-    }, connection = Lawnchair({name: 'app',
-        display: "app User Data",
-        version: "1.0"
-    }), defaultConfig = {
-        privateSeed: String.UUID(),
-        defaultStrength: 2,
-        defaultLength: 8
-    };
+        }, connection = Lawnchair({name: 'app',
+            display: "app User Data",
+            version: "1.0"
+        }), defaultConfig = {
+            privateSeed: String.UUID(),
+            defaultStrength: 2,
+            defaultLength: 8
+        },
+        lastInput;
 
     UserData.prototype = {
 
@@ -19,7 +20,12 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
 
             obj.key = 'tag:' + id;
 
+            delete obj.tag;
+            delete obj.password;
+            delete obj.showAdvanced;
+
             connection.save(obj);
+
         },
         getTag: function(id) {
 
@@ -30,6 +36,12 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
             });
 
             return d.promise();
+        },
+        setLastInput: function(config) {
+            lastInput = config;
+        },
+        getLastInput: function() {
+            return lastInput;
         },
         saveConfig: function(config) {
 
@@ -115,15 +127,15 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
 
                 var data = JSON.parse(importData);
 
-                connection.nuke();
-
                 _(data).forIn(_.bind(function(v, k) {
 
                     if(k === 'options') {
-                        if(v.hasOwnProperty('defaultLength') && v.hasOwnProperty('defaultStrength') && v.hasOwnProperty('privateSeed')) {
+                        if(v.hasOwnProperty('defaultLength') &&
+                            v.hasOwnProperty('defaultStrength') &&
+                            v.hasOwnProperty('privateSeed')) {
                             this.saveConfig(v);
                         } else {
-                            throw {parseError: 'config is malformed'};
+                            throw {parseError: 'PARSE_ERROR'};
                         }
                     }
 
@@ -138,8 +150,7 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
                             this.saveTag(x, v);
 
                         } else {
-                            debugger;
-                            throw {parseError:x + ' tag is malformed'};
+                            throw {parseError: 'PARSE_ERROR'};
                         }
                     }
 
@@ -148,14 +159,14 @@ define(['app', 'lodash', 'jquery', 'lawnchair-webkit-sqlite'], function(app, _, 
                 return d.resolve();
 
             } catch(err) {
-                return d.reject({parseError:'malformed JSON'});
+                return d.reject({parseError: 'PARSE_ERROR'});
             }
 
         }
 
     };
 
-    app.factory('UserData', function() {
+    app.factory('UserDataService', function() {
 
         return new UserData();
 

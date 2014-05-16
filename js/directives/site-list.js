@@ -1,22 +1,4 @@
-define(['app', 'jquery', 'lodash', 'ui-bootstrap', 'ui-bootstrap-tpls'], function(app, $, _) {
-
-    var substringMatcher = function(strs) {
-        return function findMatches(q, cb) {
-            var matches, substrRegex;
-
-            matches = [];
-
-            substrRegex = new RegExp(q, 'i');
-
-            _.each(strs, function(str) {
-                if(substrRegex.test(str)) {
-                    matches.push({ value: str });
-                }
-            });
-
-            cb(matches);
-        };
-    };
+define(['app', 'ui-bootstrap', 'ui-bootstrap-tpls'], function(app) {
 
     app.directive('siteList', function() {
 

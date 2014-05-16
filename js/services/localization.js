@@ -6,7 +6,7 @@ define(['app', 'i18n!nls/strings'], function (app, localeStrings) {
         return localeStrings;
     });
 
-    app.factory('localizationService', ['locale', function (locale) {
+    app.factory('LocalizationService', ['locale', function (locale) {
         function getLocalizedValue(path){
             var keys = path.split('.');
             return getValue(keys);
